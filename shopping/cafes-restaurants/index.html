@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المقاهي والمطاعم - ليه الرياض؟</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+
+        :root {
+            --color1: #fff4e3;
+            --color2: #fdf4e4;
+            --color3: #fce7cc;
+            --color4: #AB7E50;
+            --color5: #aea56d;
+            --color6: #255c46;
+            --dark-bg: var(--color1);
+            --dark-text: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--color6), var(--color5));
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color3);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--color4);
+        }
+
+        /* قائمة البرجر */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color2);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            position: relative;
+            text-align: center;
+        }
+
+        nav ul li a {
+            color: var(--color2);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--color4);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-switcher select {
+            background-color: var(--color6);
+            color: var(--color2);
+            border: 1px solid var(--color5);
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .language-switcher select:hover {
+            background-color: var(--color5);
+            transform: scale(1.05);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i0.wp.com/dleel.hayaak.com/wp-content/uploads/2022/11/WJD5848.webp');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color2);
+            margin-bottom: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--color4);
+        }
+
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--color4);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color5), var(--color4));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .content {
+
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .venues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .venue-card {
+            background: linear-gradient(135deg, rgba(37, 92, 70, 0.3), rgba(174, 165, 109, 0.2));
+            border-radius: 15px;
+            padding: 30px;
+            border-right: 5px solid var(--color4);
+            transition: all 0.3s ease;
+        }
+
+        .venue-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .venue-card h3 {
+            color: var(--color4);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .venue-card p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--color4), var(--color5));
+            color: var(--dark-bg);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(45deg, var(--color5), var(--color4));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: var(--color4);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            color: var(--color1);
+        }
+
+        .footer-links li {
+            color: var(--color1);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--color1);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color4);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color1);
+        }
+
+        /* قائمة المقاهي */
+        .cafes-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .cafe-card {
+            background: linear-gradient(135deg, rgba(37, 92, 70, 0.3), rgba(174, 165, 109, 0.2));
+            border-radius: 15px;
+            padding: 25px;
+            border-right: 5px solid var(--color4);
+            transition: all 0.3s ease;
+            text-align: right;
+        }
+
+        .cafe-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cafe-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .cafe-card h3 {
+            color: var(--color4);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .cafe-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .cafe-link {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--color4), var(--color5));
+            color: var(--dark-bg);
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .cafe-link:hover {
+            background: linear-gradient(45deg, var(--color5), var(--color4));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: linear-gradient(135deg, var(--color6), var(--color5));
+                transition: right 0.3s ease;
+                z-index: 1000;
+                padding-top: 80px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 1.2rem;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                margin: 5px 0;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .language-switcher {
+                margin-left: auto;
+                margin-right: 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .cafes-list {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none !important;
+            }
+
+            nav {
+                position: static !important;
+                width: auto !important;
+                height: auto !important;
+                background: none !important;
+                padding-top: 0 !important;
+            }
+
+            nav ul {
+                flex-direction: row !important;
+                align-items: center !important;
+                padding: 0 !important;
+            }
+
+            nav ul li {
+                width: auto !important;
+                margin: 2px;
+            }
+
+            nav ul li a {
+                display: inline-block !important;
+                padding: 8px !important;
+                font-size: 1.3rem !important;
+                border-radius: 4px !important;
+                background: none !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-container">
+            <a data-en="Why Riyadh?" href="../../index.php" class="logo"><img src="../../assets/images/Logo.png" alt="الشعار"
+                    style="height: auto; width: 100px;"></a>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a></li>
+                    <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية" data-en="Tourist Places">الأماكن السياحية</a></li>
+                    <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد" data-en="Culture & Traditions">الثقافة والتقاليد</a></li>
+                    <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                    <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه" data-en="Shopping & Entertainment">التسوق والترفيه</a></li>
+                    <li><a href="../../index.php#guide" data-ar="دليل الزائر" data-en="Visitor Guide">دليل الزائر</a></li>
+                    <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض" data-en="Tell Us About Riyadh">كلمنا عن الرياض</a></li>
+                    <li><a href="../../index.php#contact" data-ar="اتصل بنا" data-en="Contact Us">اتصل بنا</a></li>
+                </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <select id="languageSelect" title="اختر اللغة / Choose Language"
+                    aria-label="اختر اللغة / Choose Language">
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 data-ar="المقاهي والمطاعم في الرياض" data-en="Cafes & Restaurants in Riyadh">المقاهي والمطاعم في الرياض
+            </h1>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-ar="اكتشف أفضل تجارب الطعام" data-en="Discover the Best Dining Experiences">اكتشف أفضل تجارب
+                    الطعام</h2>
+            </div>
+
+            <div class="content">
+                <h3 style="color: var(--color4); font-size: 1.8rem; margin-bottom: 30px; text-align: center;" data-ar="أشهر المقاهي في الرياض" data-en="Most Famous Cafes in Riyadh">أشهر المقاهي في الرياض</h3>
+                
+                <div class="cafes-list">
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Cafes/image-000.png" alt="Shots Café">
+                        <img src="../../assets/images/Riyadh Cafes/image-001.png" alt="Shots Café">
+                        <h3 data-ar="Shots Café (شوتس كافية)" data-en="Shots Café">Shots Café (شوتس كافية)</h3>
+                        <p data-ar="يعد من أجمل المقاهي في الرياض، متخصص في تقديم القهوة المختصة بطريقة مميزة، حيث يقدمون لكل كوب قهوة رسمة فنية جميلة، مع إمكانية طلب رسومات خاصة على الأكواب. الكافيه مناسب للعوائل." data-en="One of the most beautiful cafes in Riyadh, specializing in serving specialty coffee in a unique way, where they create beautiful artistic designs on each cup, with the possibility of ordering custom designs on cups. The cafe is suitable for families.">يعد من أجمل المقاهي في الرياض، متخصص في تقديم القهوة المختصة بطريقة مميزة، حيث يقدمون لكل كوب قهوة رسمة فنية جميلة، مع إمكانية طلب رسومات خاصة على الأكواب. الكافيه مناسب للعوائل.</p>
+                        <a href="https://share.google/PCLJd5Q6kx53KugNX" target="_blank" class="cafe-link" data-ar="زيارة الموقع" data-en="Visit Website">زيارة الموقع</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Cafes/image-002.png" alt="BK Café">
+                        <img src="../../assets/images/Riyadh Cafes/image-003.png" alt="BK Café">
+                        <h3 data-ar="BK كافية" data-en="BK Café">BK كافية</h3>
+                        <p data-ar="كافية مختص بتقديم تشكيلة متنوعة من الحلا والمخبوزات إلى جانب القهوة. يتميز بطريقة تقديم الحلويات الفريدة، ومساحته متوسطة ومناسبة للعوائل." data-en="A cafe specializing in serving a variety of sweets and pastries alongside coffee. It features a unique way of presenting desserts, with a medium-sized space suitable for families.">كافية مختص بتقديم تشكيلة متنوعة من الحلا والمخبوزات إلى جانب القهوة. يتميز بطريقة تقديم الحلويات الفريدة، ومساحته متوسطة ومناسبة للعوائل.</p>
+                        <a href="https://maps.app.goo.gl/vMGdPc62rQ6XwAme7" target="_blank" class="cafe-link" data-ar="زيارة الموقع" data-en="Visit Website">زيارة الموقع</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Cafes/image-004.png" alt="Dyar Bakery">
+                        <img src="../../assets/images/Riyadh Cafes/image-005.png" alt="Dyar Bakery">
+                        <img src="../../assets/images/Riyadh Cafes/image-006.png" alt="Dyar Bakery">
+                        <h3 data-ar="Dyar Bakery (ديار كافية)" data-en="Dyar Bakery">Dyar Bakery (ديار كافية)</h3>
+                        <p data-ar="الوجهة الأولى للعوائل بفضل مساحته الكبيرة وتعدد الجلسات. يقدم قائمة واسعة من الحلويات والقهوة والمشروبات الأخرى، ومناسب للاحتفالات، إذ يوفر أحجامًا كبيرة من الكيك وأماكن مخصصة للتجمعات والاحتفال مع الأصدقاء والعائلة." data-en="The first destination for families thanks to its large space and multiple seating areas. It offers a wide menu of sweets, coffee, and other beverages, and is suitable for celebrations, as it provides large-sized cakes and dedicated spaces for gatherings and celebrations with friends and family.">الوجهة الأولى للعوائل بفضل مساحته الكبيرة وتعدد الجلسات. يقدم قائمة واسعة من الحلويات والقهوة والمشروبات الأخرى، ومناسب للاحتفالات، إذ يوفر أحجامًا كبيرة من الكيك وأماكن مخصصة للتجمعات والاحتفال مع الأصدقاء والعائلة.</p>
+                        <a href="https://dyarbakery.com/" target="_blank" class="cafe-link" data-ar="زيارة الموقع" data-en="Visit Website">زيارة الموقع</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Cafes/image-007.png" alt="Ashjar Café">
+                        <img src="../../assets/images/Riyadh Cafes/image-008.png" alt="Ashjar Café">
+                        <img src="../../assets/images/Riyadh Cafes/image-009.png" alt="Ashjar Café">
+                        <h3 data-ar="Ashjar Café (أشجار كافية)" data-en="Ashjar Café">Ashjar Café (أشجار كافية)</h3>
+                        <p data-ar="يتميز بتصميم داخلي جميل يحتوي على أشجار تمنح الزائر إحساسًا بأنه في حديقة، مما يجعل تجربة احتساء القهوة فريدة ومريحة." data-en="Features a beautiful interior design containing trees that give visitors a feeling of being in a garden, making the coffee experience unique and comfortable.">يتميز بتصميم داخلي جميل يحتوي على أشجار تمنح الزائر إحساسًا بأنه في حديقة، مما يجعل تجربة احتساء القهوة فريدة ومريحة.</p>
+                        <a href="https://ashjarcafe.com/" target="_blank" class="cafe-link" data-ar="زيارة الموقع" data-en="Visit Website">زيارة الموقع</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Cafes/image-010.png" alt="VEO Café">
+                        <img src="../../assets/images/Riyadh Cafes/image-011.png" alt="VEO Café">
+                        <h3 data-ar="VEO كافية" data-en="VEO Café">VEO كافية</h3>
+                        <p data-ar="من أشهر المقاهي المتخصصة في القهوة المختصة، يقدمون ألذ أنواع القهوة والحلويات في أجواء مريحة وهادئة مع إطلالة رائعة. مساحة الكافيه كبيرة ومناسبة للعوائل." data-en="One of the most famous cafes specializing in specialty coffee, they serve the most delicious types of coffee and desserts in a comfortable and quiet atmosphere with a wonderful view. The cafe space is large and suitable for families.">من أشهر المقاهي المتخصصة في القهوة المختصة، يقدمون ألذ أنواع القهوة والحلويات في أجواء مريحة وهادئة مع إطلالة رائعة. مساحة الكافيه كبيرة ومناسبة للعوائل.</p>
+                        <a href="https://share.google/PSj12RBap5FElEebv" target="_blank" class="cafe-link" data-ar="زيارة الموقع" data-en="Visit Website">زيارة الموقع</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Cafes/image-012.png" alt="Okawa Café">
+                        <img src="../../assets/images/Riyadh Cafes/image-013.png" alt="Okawa Café">
+                        <h3 data-ar="Okawa Café (أوكاوا كافية)" data-en="Okawa Café">Okawa Café (أوكاوا كافية)</h3>
+                        <p data-ar="كافيه ياباني يقدم تجربة فريدة من نوعها من خلال الحلويات اليابانية والقهوة المختصة. يتميز بطاقم يقدم الخدمة بالزي الياباني، ما يمنح الزائر تجربة مميزة. الكافيه مناسب للعوائل." data-en="A Japanese cafe offering a unique experience through Japanese desserts and specialty coffee. It features a staff serving in Japanese attire, giving visitors a distinctive experience. The cafe is suitable for families.">كافيه ياباني يقدم تجربة فريدة من نوعها من خلال الحلويات اليابانية والقهوة المختصة. يتميز بطاقم يقدم الخدمة بالزي الياباني، ما يمنح الزائر تجربة مميزة. الكافيه مناسب للعوائل.</p>
+                        <a href="https://goo.gl/maps/PyzNUWnsvzvUm3Ka7" target="_blank" class="cafe-link" data-ar="زيارة الموقع" data-en="Visit Website">زيارة الموقع</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Cafes/image-014.png" alt="Ralph Lauren Café">
+                        <img src="../../assets/images/Riyadh Cafes/image-015.png" alt="Ralph Lauren Café">
+                        <h3 data-ar="Ralph Lauren Café (رالف لورين كافيه)" data-en="Ralph Lauren Café">Ralph Lauren Café (رالف لورين كافيه)</h3>
+                        <p data-ar="من أشهر الكافيهات العالمية في الرياض، يتميز بإطلالة جميلة على أبراج مركز الملك عبدالله المالي. يقدم أنواعًا متعددة من القهوة والحلويات، ويعرف بتصميمه الأنيق وبيع تشكيلة من الأكواب المميزة. مساحة الكافيه صغيرة نوعًا ما، لذا لا يناسب العوائل." data-en="One of the most famous international cafes in Riyadh, featuring a beautiful view of the King Abdullah Financial Center towers. It offers various types of coffee and desserts, and is known for its elegant design and selling a collection of distinctive cups. The cafe space is somewhat small, so it is not suitable for families.">من أشهر الكافيهات العالمية في الرياض، يتميز بإطلالة جميلة على أبراج مركز الملك عبدالله المالي. يقدم أنواعًا متعددة من القهوة والحلويات، ويعرف بتصميمه الأنيق وبيع تشكيلة من الأكواب المميزة. مساحة الكافيه صغيرة نوعًا ما، لذا لا يناسب العوائل.</p>
+                        <a href="https://share.google/KxtrRaEN4aew2Jvrw" target="_blank" class="cafe-link" data-ar="زيارة الموقع" data-en="Visit Website">زيارة الموقع</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Cafes/image-016.png" alt="NAC Café">
+                        <img src="../../assets/images/Riyadh Cafes/image-017.png" alt="NAC Café">
+                        <h3 data-ar="NAC كافية" data-en="NAC Café">NAC كافية</h3>
+                        <p data-ar="كافيه يتميز بأجواء هادئة ومناسبة لاحتساء القهوة والاسترخاء. يقدم مجموعة متنوعة من الحلويات والقهوة المختصة، ويعد مناسباً للعوائل والاحتفالات." data-en="A cafe characterized by a quiet atmosphere suitable for enjoying coffee and relaxation. It offers a variety of desserts and specialty coffee, and is suitable for families and celebrations.">كافيه يتميز بأجواء هادئة ومناسبة لاحتساء القهوة والاسترخاء. يقدم مجموعة متنوعة من الحلويات والقهوة المختصة، ويعد مناسباً للعوائل والاحتفالات.</p>
+                        <a href="https://nacriyadh.com/menu" target="_blank" class="cafe-link" data-ar="زيارة الموقع" data-en="Visit Website">زيارة الموقع</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Cafes/image-018.png" alt="Sugar Hive Café">
+                        <img src="../../assets/images/Riyadh Cafes/image-019.png" alt="Sugar Hive Café">
+                        <h3 data-ar="Sugar Hive Café (شوقر هايف)" data-en="Sugar Hive Café">Sugar Hive Café (شوقر هايف)</h3>
+                        <p data-ar="يتميز بتقديم الفرنش توست بجميع النكهات، إلى جانب القهوة المختصة من محاصيل مختلفة. يعرف بتصميمه الداخلي المستوحى من التراث النجدي، ما يمنحه طابعاً فريداً ومميزاً." data-en="Known for serving French toast with all flavors, alongside specialty coffee from different crops. It is known for its interior design inspired by Najdi heritage, giving it a unique and distinctive character.">يتميز بتقديم الفرنش توست بجميع النكهات، إلى جانب القهوة المختصة من محاصيل مختلفة. يعرف بتصميمه الداخلي المستوحى من التراث النجدي، ما يمنحه طابعاً فريداً ومميزاً.</p>
+                        <a href="https://share.google/vBN5UBomazjqiBFsl" target="_blank" class="cafe-link" data-ar="زيارة الموقع" data-en="Visit Website">زيارة الموقع</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Cafes/image-020.png" alt="Salera Café">
+                        <img src="../../assets/images/Riyadh Cafes/image-021.png" alt="Salera Café">
+                        <h3 data-ar="Salera Café (ساليرا كافيه)" data-en="Salera Café">Salera Café (ساليرا كافيه)</h3>
+                        <p data-ar="يقدم القهوة المختصة بإطلالة رائعة على برج المملكة. يتميز المكان بتصميمه الداخلي الجميل ومساحته الواسعة المناسبة للعوائل." data-en="Serves specialty coffee with a wonderful view of the Kingdom Tower. The place is characterized by its beautiful interior design and spacious area suitable for families.">يقدم القهوة المختصة بإطلالة رائعة على برج المملكة. يتميز المكان بتصميمه الداخلي الجميل ومساحته الواسعة المناسبة للعوائل.</p>
+                        <a href="https://salera.sa/" target="_blank" class="cafe-link" data-ar="زيارة الموقع" data-en="Visit Website">زيارة الموقع</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content" style="margin-top: 60px;">
+                <h3 style="color: var(--color4); font-size: 1.8rem; margin-bottom: 30px; text-align: center;" data-ar="أشهر المطاعم الشعبية في الرياض" data-en="Most Famous Traditional Restaurants in Riyadh">أشهر المطاعم الشعبية في الرياض</h3>
+                
+                <div class="cafes-list">
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img22.png" alt="مطعم عسيب">
+                        <img src="../../assets/images/Riyadh Restaurants/img23.png" alt="مطعم عسيب">
+                        <img src="../../assets/images/Riyadh Restaurants/img24.png" alt="مطعم عسيب">
+                        <img src="../../assets/images/Riyadh Restaurants/img25.png" alt="مطعم عسيب">
+                        <h3 data-ar="مطعم عسيب" data-en="Aseeb Restaurant">مطعم عسيب</h3>
+                        <p data-ar="يعُتبر من أشهر المطاعم الشعبية في الرياض، ويُقدّم الأكلات السعودية الأصيلة بطريقة ممتازة. التصميم الداخلي جميل والخدمة سريعة." data-en="Considered one of the most famous traditional restaurants in Riyadh, serving authentic Saudi dishes in an excellent way. Beautiful interior design and fast service.">يعُتبر من أشهر المطاعم الشعبية في الرياض، ويُقدّم الأكلات السعودية الأصيلة بطريقة ممتازة. التصميم الداخلي جميل والخدمة سريعة.</p>
+                        <p style="margin-top: 10px; font-weight: bold; color: var(--color4);" data-ar="رقم الحجز: 920028226" data-en="Reservation: 920028226">رقم الحجز: 920028226</p>
+                        <a href="https://www.aseeb.sa/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img26.png" alt="مطعم فريج صويلح">
+                        <img src="../../assets/images/Riyadh Restaurants/img27.png" alt="مطعم فريج صويلح">
+                        <img src="../../assets/images/Riyadh Restaurants/img28.png" alt="مطعم فريج صويلح">
+                        <h3 data-ar="مطعم فريج صويلح" data-en="Freej Swailah Restaurant">مطعم فريج صويلح</h3>
+                        <p data-ar="من أكبر المطاعم الشعبية المتخصصة في تقديم الأكلات الكويتية بالنكهة الخليجية. جلسات واسعة ومناسبة للعائلات. لا يحتاج إلى حجز مسبق." data-en="One of the largest traditional restaurants specializing in serving Kuwaiti dishes with Gulf flavors. Spacious seating suitable for families. No prior reservation needed.">من أكبر المطاعم الشعبية المتخصصة في تقديم الأكلات الكويتية بالنكهة الخليجية. جلسات واسعة ومناسبة للعائلات. لا يحتاج إلى حجز مسبق.</p>
+                        <a href="https://saudirestaurantsguide.com/freej-swaileh-menu/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img29.png" alt="مطعم مقلط الفريج">
+                        <img src="../../assets/images/Riyadh Restaurants/img30.png" alt="مطعم مقلط الفريج">
+                        <img src="../../assets/images/Riyadh Restaurants/img31.png" alt="مطعم مقلط الفريج">
+                        <h3 data-ar="مطعم مقلط الفريج" data-en="Maqalat Al-Fareej Restaurant">مطعم مقلط الفريج</h3>
+                        <p data-ar="يتميز بالديكور الداخلي والخارجي، ويقدم الإفطار والأطباق الرئيسية الشعبية. له عدة فروع في الرياض." data-en="Features beautiful interior and exterior decoration, serving breakfast and traditional main dishes. Has several branches in Riyadh.">يتميز بالديكور الداخلي والخارجي، ويقدم الإفطار والأطباق الرئيسية الشعبية. له عدة فروع في الرياض.</p>
+                        <p style="margin-top: 10px; font-weight: bold; color: var(--color4);" data-ar="رقم الحجز: 0535000384" data-en="Reservation: 0535000384">رقم الحجز: 0535000384</p>
+                        <a href="https://saudirestaurantsguide.com/maqalat-alfareej-menu/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img32.png" alt="مطعم الرومانسية">
+                        <img src="../../assets/images/Riyadh Restaurants/img33.png" alt="مطعم الرومانسية">
+                        <img src="../../assets/images/Riyadh Restaurants/img34.png" alt="مطعم الرومانسية">
+                        <h3 data-ar="مطعم الرومانسية" data-en="Al-Romansiah Restaurant">مطعم الرومانسية</h3>
+                        <p data-ar="من أشهر مطاعم الأرز والأكلات السعودية. جلساته مناسبة للعوائل والمجموعات. لا يحتاج إلى حجز مسبق." data-en="One of the most famous restaurants for rice and Saudi dishes. Its seating is suitable for families and groups. No prior reservation needed.">من أشهر مطاعم الأرز والأكلات السعودية. جلساته مناسبة للعوائل والمجموعات. لا يحتاج إلى حجز مسبق.</p>
+                        <a href="https://www.alromansiah.com/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img35.png" alt="مطعم طوفرية">
+                        <img src="../../assets/images/Riyadh Restaurants/img36.png" alt="مطعم طوفرية">
+                        <img src="../../assets/images/Riyadh Restaurants/img37.png" alt="مطعم طوفرية">
+                        <img src="../../assets/images/Riyadh Restaurants/img38.png" alt="مطعم طوفرية">
+                        <h3 data-ar="مطعم طوفرية" data-en="Tofareya Restaurant">مطعم طوفرية</h3>
+                        <p data-ar="يقدم أكلات حجازية أصيلة، وأجواؤه الداخلية مميزة لكل طاولة." data-en="Serves authentic Hijazi dishes, with distinctive interior atmospheres for each table.">يقدم أكلات حجازية أصيلة، وأجواؤه الداخلية مميزة لكل طاولة.</p>
+                        <p style="margin-top: 10px; font-weight: bold; color: var(--color4);" data-ar="رقم الحجز: 0559099067" data-en="Reservation: 0559099067">رقم الحجز: 0559099067</p>
+                        <a href="https://ananinja.com/sa/ar/restaurants/tofareya-10522" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img39.png" alt="مطعم تميسة">
+                        <img src="../../assets/images/Riyadh Restaurants/img40.png" alt="مطعم تميسة">
+                        <img src="../../assets/images/Riyadh Restaurants/img41.png" alt="مطعم تميسة">
+                        <h3 data-ar="مطعم تميسة" data-en="Tameesa Restaurant">مطعم تميسة</h3>
+                        <p data-ar="مطعم إفطار شعبي مميز يقدم الفطور السعودي التقليدي. الموظفون يرتدون أزياء شعبية تضيف طابعاً خاصاً. لا يحتاج إلى حجز." data-en="A distinctive traditional breakfast restaurant serving traditional Saudi breakfast. Staff wear traditional costumes that add a special character. No reservation needed.">مطعم إفطار شعبي مميز يقدم الفطور السعودي التقليدي. الموظفون يرتدون أزياء شعبية تضيف طابعاً خاصاً. لا يحتاج إلى حجز.</p>
+                        <a href="https://tameesa.sa/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img42.png" alt="مطعم خبز ونواشف">
+                        <img src="../../assets/images/Riyadh Restaurants/img43.png" alt="مطعم خبز ونواشف">
+                        <img src="../../assets/images/Riyadh Restaurants/img44.png" alt="مطعم خبز ونواشف">
+                        <h3 data-ar="مطعم خبز ونواشف" data-en="Khubz wa Nawashef Restaurant">مطعم خبز ونواشف</h3>
+                        <p data-ar="يقدم مجموعة متنوعة من أطباق الإفطار الشعبي في الرياض." data-en="Serves a variety of traditional breakfast dishes in Riyadh.">يقدم مجموعة متنوعة من أطباق الإفطار الشعبي في الرياض.</p>
+                        <p style="margin-top: 10px; font-weight: bold; color: var(--color4);" data-ar="رقم الحجز: +966545555946" data-en="Reservation: +966545555946">رقم الحجز: +966545555946</p>
+                        <a href="https://yallaqrcodes.com/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img45.png" alt="مطعم القرية النجدية">
+                        <img src="../../assets/images/Riyadh Restaurants/img46.png" alt="مطعم القرية النجدية">
+                        <img src="../../assets/images/Riyadh Restaurants/img47.png" alt="مطعم القرية النجدية">
+                        <img src="../../assets/images/Riyadh Restaurants/img48.png" alt="مطعم القرية النجدية">
+                        <h3 data-ar="مطعم القرية النجدية" data-en="Najd Village Restaurant">مطعم القرية النجدية</h3>
+                        <p data-ar="من أشهر المطاعم التي تقدم الأكلات السعودية الأصيلة بطابع نجدي وتراثي. يوفر جلسات أرضية شعبية وتصميماً فريداً." data-en="One of the most famous restaurants serving authentic Saudi dishes with a Najdi and heritage character. Offers traditional floor seating and unique design.">من أشهر المطاعم التي تقدم الأكلات السعودية الأصيلة بطابع نجدي وتراثي. يوفر جلسات أرضية شعبية وتصميماً فريداً.</p>
+                        <a href="https://www.najdvillage.com/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content" style="margin-top: 60px;">
+                <h3 style="color: var(--color4); font-size: 1.8rem; margin-bottom: 30px; text-align: center;" data-ar="أشهر المطاعم العالمية في الرياض" data-en="Most Famous International Restaurants in Riyadh">أشهر المطاعم العالمية في الرياض</h3>
+                
+                <div class="cafes-list">
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img49.png" alt="Pantera Riyadh">
+                        <img src="../../assets/images/Riyadh Restaurants/img50.png" alt="Pantera Riyadh">
+                        <h3 data-ar="Pantera Riyadh" data-en="Pantera Riyadh">Pantera Riyadh</h3>
+                        <p data-ar="يتميز بقائمة عالمية بطريقة مميزة ومساحات واسعة وجلسات تناسب العوائل." data-en="Features an international menu in a distinctive way with spacious areas and seating suitable for families.">يتميز بقائمة عالمية بطريقة مميزة ومساحات واسعة وجلسات تناسب العوائل.</p>
+                        <a href="https://pantera.sa/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img51.png" alt="Pantera Riyadh">
+                        <img src="../../assets/images/Riyadh Restaurants/img52.png" alt="Pantera Riyadh">
+                        <h3 data-ar="Tashas" data-en="Tashas">Tashas</h3>
+                        <p data-ar="يقدم أطباق إفطار متنوعة، ويتميز بإطلالة على أبراج الملك عبدالله." data-en="Serves a variety of breakfast dishes, featuring a view of King Abdullah towers.">يقدم أطباق إفطار متنوعة، ويتميز بإطلالة على أبراج الملك عبدالله.</p>
+                        <a href="https://tashas.com/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img53.png" alt="Tashas">
+                        <img src="../../assets/images/Riyadh Restaurants/img54.png" alt="Tashas">
+                        <img src="../../assets/images/Riyadh Restaurants/img55.png" alt="Tashas">
+                        <h3 data-ar="Jon & Vinny's" data-en="Jon & Vinny's">Jon & Vinny's</h3>
+                        <p data-ar="مطعم إيطالي يقدم قائمة مناسبة للعائلات والأصدقاء بأجواء هادئة." data-en="An Italian restaurant offering a menu suitable for families and friends in a quiet atmosphere.">مطعم إيطالي يقدم قائمة مناسبة للعائلات والأصدقاء بأجواء هادئة.</p>
+                        <a href="https://jonandvinnys.com/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img56.png" alt="Memos">
+                        <img src="../../assets/images/Riyadh Restaurants/img57.png" alt="Memos">
+                        <img src="../../assets/images/Riyadh Restaurants/img58.png" alt="Memos">
+                        <h3 data-ar="Memos" data-en="Memos">Memos</h3>
+                        <p data-ar="من أشهر المطاعم الإيطالية التي تقدم البيتزا بطريقة مميزة وبأجواء هادئة." data-en="One of the most famous Italian restaurants serving pizza in a distinctive way and quiet atmosphere.">من أشهر المطاعم الإيطالية التي تقدم البيتزا بطريقة مميزة وبأجواء هادئة.</p>
+                        <a href="https://memos.sa/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img59.png" alt="Cipriani">
+                        <img src="../../assets/images/Riyadh Restaurants/img60.png" alt="Cipriani">
+                        <img src="../../assets/images/Riyadh Restaurants/img61.png" alt="Cipriani">
+                        <h3 data-ar="Cipriani" data-en="Cipriani">Cipriani</h3>
+                        <p data-ar="من أقدم وأشهر المطاعم العالمية! متخصص في تقديم الستيك بطريقة فاخرة بأجواء مناسبة للقاءات." data-en="One of the oldest and most famous international restaurants! Specializes in serving steak in a luxurious way with an atmosphere suitable for meetings.">من أقدم وأشهر المطاعم العالمية! متخصص في تقديم الستيك بطريقة فاخرة بأجواء مناسبة للقاءات.</p>
+                        <a href="https://cipriani.com/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img62.png" alt="Café de Paris Entrecôte">
+                        <img src="../../assets/images/Riyadh Restaurants/img63.png" alt="Café de Paris Entrecôte">
+                        <img src="../../assets/images/Riyadh Restaurants/img64.png" alt="Café de Paris Entrecôte">
+                        <img src="../../assets/images/Riyadh Restaurants/img65.png" alt="Café de Paris Entrecôte">
+                        <h3 data-ar="Café de Paris Entrecôte" data-en="Café de Paris Entrecôte">Café de Paris Entrecôte</h3>
+                        <p data-ar="مطعم عالمي متخصص في تقديم الستيك بصلصة المنتريكو." data-en="An international restaurant specializing in serving steak with Entrecôte sauce.">مطعم عالمي متخصص في تقديم الستيك بصلصة المنتريكو.</p>
+                        <a href="https://cafedeparis.com/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img66.png" alt="Oulu">
+                        <img src="../../assets/images/Riyadh Restaurants/img67.png" alt="Oulu">
+                        <h3 data-ar="Oulu" data-en="Oulu">Oulu</h3>
+                        <p data-ar="مطعم إيطالي يقدم البيتزا والمقبلات الإيطالية بأجواء راقية." data-en="An Italian restaurant serving pizza and Italian appetizers in an elegant atmosphere.">مطعم إيطالي يقدم البيتزا والمقبلات الإيطالية بأجواء راقية.</p>
+                        <a href="https://oulu.sa/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+
+                    <div class="cafe-card">
+                        <img src="../../assets/images/Riyadh Restaurants/img68.png" alt="Parker's">
+                        <h3 data-ar="Parker's" data-en="Parker's">Parker's</h3>
+                        <p data-ar="يقدم أطباق إفطار متنوعة ويتميز بأجواء جميلة وتصميم مميز." data-en="Serves a variety of breakfast dishes and features beautiful atmosphere and distinctive design.">يقدم أطباق إفطار متنوعة ويتميز بأجواء جميلة وتصميم مميز.</p>
+                        <a href="https://parkers.sa/" target="_blank" class="cafe-link" data-ar="قائمة الطعام" data-en="Menu">قائمة الطعام</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="venues-grid" style="display:none;">
+                <div class="venue-card">
+                    <h3 data-ar="المطاعم التقليدية" data-en="Traditional Restaurants">المطاعم التقليدية</h3>
+                    <p data-ar="مطاعم تقدم الأطباق السعودية التقليدية مثل الكبسة، المطازيز، والمرقوق. مطاعم تحافظ على الطعم الأصيل والتراث الطهوي السعودي."
+                        data-en="Restaurants serving traditional Saudi dishes such as Kabsa, Mutaziz, and Marqouq. Restaurants that preserve authentic taste and Saudi culinary heritage.">
+                        مطاعم تقدم الأطباق السعودية التقليدية مثل الكبسة، المطازيز، والمرقوق. مطاعم تحافظ على الطعم
+                        الأصيل والتراث الطهوي السعودي.</p>
+                </div>
+
+                <div class="venue-card">
+                    <h3 data-ar="المطاعم العالمية" data-en="International Restaurants">المطاعم العالمية</h3>
+                    <p data-ar="مطاعم تقدم أطباق من مختلف دول العالم، من المطبخ الإيطالي إلى الياباني، ومن الفرنسي إلى الهندي. مطاعم تقدم تجارب طعام متنوعة ومميزة."
+                        data-en="Restaurants serving dishes from different countries around the world, from Italian to Japanese cuisine, and from French to Indian. Restaurants offering diverse and distinctive dining experiences.">
+                        مطاعم تقدم أطباق من مختلف دول العالم، من المطبخ الإيطالي إلى الياباني، ومن الفرنسي إلى الهندي.
+                        مطاعم تقدم تجارب طعام متنوعة ومميزة.</p>
+                </div>
+
+                <div class="venue-card">
+                    <h3 data-ar="المقاهي المحلية" data-en="Local Cafes">المقاهي المحلية</h3>
+                    <p data-ar="مقاهي تقدم القهوة العربية الأصيلة والتمر، مع أجواء تراثية أصيلة. مقاهي تحافظ على التقاليد المحلية وتقدم تجربة فريدة."
+                        data-en="Cafes serving authentic Arabic coffee and dates, with authentic heritage atmosphere. Cafes that preserve local traditions and provide a unique experience.">
+                        مقاهي تقدم القهوة العربية الأصيلة والتمر، مع أجواء تراثية أصيلة. مقاهي تحافظ على التقاليد
+                        المحلية وتقدم تجربة فريدة.</p>
+                </div>
+
+                <div class="venue-card">
+                    <h3 data-ar="المقاهي المتخصصة" data-en="Specialized Cafes">المقاهي المتخصصة</h3>
+                    <p data-ar="مقاهي متخصصة في أنواع مختلفة من القهوة، من الإسبريسو إلى الكابتشينو، مع أجواء عصرية ومريحة. مقاهي تقدم تجربة قهوة فريدة."
+                        data-en="Cafes specialized in different types of coffee, from espresso to cappuccino, with modern and comfortable atmosphere. Cafes offering a unique coffee experience.">
+                        مقاهي متخصصة في أنواع مختلفة من القهوة، من الإسبريسو إلى الكابتشينو، مع أجواء عصرية ومريحة.
+                        مقاهي تقدم تجربة قهوة فريدة.</p>
+                </div>
+
+                <div class="venue-card">
+                    <h3 data-ar="مطاعم الوجبات السريعة" data-en="Fast Food Restaurants">مطاعم الوجبات السريعة</h3>
+                    <p data-ar="مطاعم تقدم الوجبات السريعة المحلية والعالمية، من البرجر إلى الشاورما، مع خدمة سريعة وأسعار معقولة. مطاعم تناسب جميع الأذواق والميزانيات."
+                        data-en="Restaurants serving local and international fast food, from burgers to shawarma, with fast service and reasonable prices. Restaurants suitable for all tastes and budgets.">
+                        مطاعم تقدم الوجبات السريعة المحلية والعالمية، من البرجر إلى الشاورما، مع خدمة سريعة وأسعار
+                        معقولة. مطاعم تناسب جميع الأذواق والميزانيات.</p>
+                </div>
+
+                <div class="venue-card">
+                    <h3 data-ar="مطاعم الحلويات" data-en="Dessert Restaurants">مطاعم الحلويات</h3>
+                    <p data-ar="مطاعم متخصصة في الحلويات التقليدية والحديثة، من الكنافة إلى التشيز كيك، مع أجواء حلوة ومريحة. مطاعم تقدم تجربة حلويات فريدة."
+                        data-en="Restaurants specialized in traditional and modern desserts, from Kunafa to cheesecake, with sweet and comfortable atmosphere. Restaurants offering a unique dessert experience.">
+                        مطاعم متخصصة في الحلويات التقليدية والحديثة، من الكنافة إلى التشيز كيك، مع أجواء حلوة ومريحة.
+                        مطاعم تقدم تجربة حلويات فريدة.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="../../index.php" class="back-btn" data-ar="العودة للصفحة الرئيسية"
+                    data-en="Back to Homepage">العودة للصفحة الرئيسية</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-ar="ليه الرياض؟" data-en="Why Riyadh?">ليه الرياض؟</h3>
+                    <p data-ar="منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية."
+                        data-en="A comprehensive platform to introduce Riyadh city and attract tourists and residents to discover the capital of Saudi Arabia.">
+                        منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a></li>
+                        <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية" data-en="Tourist Places">الأماكن السياحية</a></li>
+                        <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد" data-en="Culture & Traditions">الثقافة والتقاليد</a></li>
+                        <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                        <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه" data-en="Shopping & Entertainment">التسوق والترفيه</a></li>
+                        <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض" data-en="Tell Us About Riyadh">كلمنا عن الرياض</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="معلومات الاتصال" data-en="Contact Information">معلومات الاتصال</h3>
+                    <ul class="footer-links">
+                        <li data-ar="الهاتف: 011 123 4567" data-en="Phone: 011 123 4567">الهاتف: 011 123 4567</li>
+                        <li data-ar="البريد الإلكتروني: info@whyriyadh.com" data-en="Email: info@whyriyadh.com">البريد
+                            الإلكتروني: info@whyriyadh.com</li>
+                        <li data-ar="العنوان: الرياض، المملكة العربية السعودية" data-en="Address: Riyadh, Saudi Arabia">
+                            العنوان: الرياض، المملكة العربية السعودية</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="تابعنا" data-en="Follow Us">تابعنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-ar="تويتر" data-en="Twitter">تويتر</a></li>
+                        <li><a href="#" data-ar="انستغرام" data-en="Instagram">انستغرام</a></li>
+                        <li><a href="#" data-ar="فيسبوك" data-en="Facebook">فيسبوك</a></li>
+                        <li><a href="#" data-ar="يوتيوب" data-en="YouTube">يوتيوب</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p data-ar="جميع الحقوق محفوظة &copy;2025 ليه الرياض؟"
+                    data-en="All rights reserved &copy;2025 Why Riyadh?">جميع الحقوق محفوظة &copy;2025 ليه الرياض؟</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentLanguage = 'ar';
+        
+        // تعيين dir عند تحميل الصفحة
+        document.documentElement.dir = 'rtl';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
+                const text = lang === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+                if (text) {
+                    // التحقق من وجود وسوم HTML في النص (مثل <br>)
+                    // إذا كان النص يحتوي على HTML، نستخدم innerHTML
+                    // وإلا نستخدم textContent للأمان
+                    if (text.includes('<br') || text.includes('<BR')) {
+                        element.innerHTML = text;
+                } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+        }
+
+        document.getElementById('languageSelect').addEventListener('change', function () {
+            changeLanguage(this.value);
+        });
+
+        // قائمة البرجر
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('nav');
+
+        if (hamburger && nav) {
+            hamburger.addEventListener('click', function () {
+                this.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            // إغلاق القائمة عند النقر على رابط
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function () {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                });
+            });
+        }
+
+    </script>
+</body>
+
+</html>

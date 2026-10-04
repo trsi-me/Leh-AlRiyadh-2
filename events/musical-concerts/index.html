@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحفلات الغنائية - ليه الرياض؟</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+        :root {
+            --color1: #fff4e3;
+            --color2: #fdf4e4;
+            --color3: #fce7cc;
+            --color4: #AB7E50;
+            --color5: #aea56d;
+            --color6: #255c46;
+            --dark-bg: var(--color1);
+            --dark-text: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--color6), var(--color5));
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color3);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--color4);
+        }
+
+        /* قائمة البرجر */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color2);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li {
+            position: relative;
+            text-align: center;
+        }
+
+        nav ul li a {
+            color: var(--color2);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--color4);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .language-switcher select {
+            background-color: var(--color6);
+            color: var(--color2);
+            border: 1px solid var(--color5);
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .language-switcher select:hover {
+            background-color: var(--color5);
+            transform: scale(1.05);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://tse1.mm.bing.net/th/id/OIP.Kh2wHTENmr_BafFddP7JGgHaE7?rs=1&pid=ImgDetMain&o=7&rm=3');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color2);
+            margin-bottom: 40px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--color4);
+        }
+        
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--color4);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color5), var(--color4));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .concerts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .concert-card {
+            background: linear-gradient(135deg, rgba(37, 92, 70, 0.3), rgba(174, 165, 109, 0.2));
+            border-radius: 15px;
+            padding: 30px;
+            border-right: 5px solid var(--color4);
+            transition: all 0.3s ease;
+        }
+        
+        .concert-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .concert-card h3 {
+            color: var(--color4);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .concert-card p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--color4), var(--color5));
+            color: var(--dark-bg);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(45deg, var(--color5), var(--color4));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--color4);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            color: var(--color1);
+        }
+
+        .footer-links li {
+            color: var(--color1);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--color1);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color4);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color1);
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: linear-gradient(135deg, var(--color6), var(--color5));
+                transition: right 0.3s ease;
+                z-index: 1000;
+                padding-top: 80px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 1.2rem;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                margin: 5px 0;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .language-switcher {
+                margin-left: auto;
+                margin-right: 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none !important;
+            }
+
+            nav {
+                position: static !important;
+                width: auto !important;
+                height: auto !important;
+                background: none !important;
+                padding-top: 0 !important;
+            }
+
+            nav ul {
+                flex-direction: row !important;
+                align-items: center !important;
+                padding: 0 !important;
+            }
+
+            nav ul li {
+                width: auto !important;
+                margin: 2px;
+            }
+
+            nav ul li a {
+                display: inline-block !important;
+                padding: 8px !important;
+                font-size: 1.3rem !important;
+                border-radius: 4px !important;
+                background: none !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a data-en="Why Riyadh?" href="../../index.php" class="logo"><img src="../../assets/images/Logo.png" alt="الشعار"
+                    style="height: auto; width: 100px;"></a>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a></li>
+                    <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية" data-en="Tourist Places">الأماكن السياحية</a></li>
+                    <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد" data-en="Culture & Traditions">الثقافة والتقاليد</a></li>
+                    <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                    <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه" data-en="Shopping & Entertainment">التسوق والترفيه</a></li>
+                    <li><a href="../../index.php#guide" data-ar="دليل الزائر" data-en="Visitor Guide">دليل الزائر</a></li>
+                    <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض" data-en="Tell Us About Riyadh">كلمنا عن الرياض</a></li>
+                    <li><a href="../../index.php#contact" data-ar="اتصل بنا" data-en="Contact Us">اتصل بنا</a></li>
+                </ul>
+            </nav>
+            
+            <div class="language-switcher">
+                <select id="languageSelect" title="اختر اللغة / Choose Language" aria-label="اختر اللغة / Choose Language">
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 data-ar="الحفلات الغنائية في الرياض" data-en="Musical Concerts in Riyadh">الحفلات الغنائية في الرياض</h1>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-ar="استمتع بأكبر الحفلات الغنائية" data-en="Enjoy the Biggest Musical Concerts">استمتع بأكبر الحفلات الغنائية</h2>
+            </div>
+            
+            <div class="content">
+                <p data-ar="استمتع بأكبر الحفلات الغنائية لأشهر الفنانين العرب والعالميين في جميع أنحاء المدينة." data-en="Enjoy the biggest musical concerts by the most famous Arab and international artists throughout the city.">استمتع بأكبر الحفلات الغنائية لأشهر الفنانين العرب والعالميين في جميع أنحاء المدينة.</p>
+                
+                <div class="concerts-grid">
+                    <div class="concert-card">
+                        <h3 data-ar="حفلة آدم - وائل جسار - محمد شاكر" data-en="Adam Concert - Wael Jassar - Mohammed Shaker">حفلة آدم - وائل جسار - محمد شاكر</h3>
+                        <p data-ar="13 نوفمبر" data-en="November 13">13 نوفمبر</p>
+                    </div>
+                    
+                    <div class="concert-card">
+                        <h3 data-ar="حفل الفنان عبدالمجيد عبدالله بالرياض" data-en="Artist Abdulmajeed Abdullah Concert in Riyadh">حفل الفنان عبدالمجيد عبدالله بالرياض</h3>
+                        <p data-ar="17 نوفمبر" data-en="November 17">17 نوفمبر</p>
+                    </div>
+                    
+                    <div class="concert-card">
+                        <h3 data-ar="ليلة موسيقى وأصدقاء - فقرة خاصة للفنان عباس إبراهيم" data-en="Night of Music and Friends - Special segment by Artist Abbas Ibrahim">ليلة موسيقى وأصدقاء - فقرة خاصة للفنان عباس إبراهيم</h3>
+                        <p data-ar="17 نوفمبر" data-en="November 17">17 نوفمبر</p>
+                    </div>
+                    
+                    <div class="concert-card">
+                        <h3 data-ar="نور مهنا، مي فاروق، فؤاد زبادي" data-en="Nour Mahna, May Farouk, Fouad Zabadi">نور مهنا، مي فاروق، فؤاد زبادي</h3>
+                        <p data-ar="20 نوفمبر" data-en="November 20">20 نوفمبر</p>
+                    </div>
+                    
+                    <div class="concert-card">
+                        <h3 data-ar="ليلة نبض الكويت - نبيل شعيل" data-en="Night of Kuwait Pulse - Nabil Shuail">ليلة نبض الكويت - نبيل شعيل</h3>
+                        <p data-ar="21 نوفمبر" data-en="November 21">21 نوفمبر</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concerts-grid" style="display:none;">
+                <div class="concert-card">
+                    <h3 data-ar="حفلات الفنانين العرب" data-en="Arab Artists Concerts">حفلات الفنانين العرب</h3>
+                    <p data-ar="حفلات لأشهر الفنانين العرب من مختلف الدول، تجمع بين الأصالة والحداثة. حفلات تقدم أفضل الأغاني العربية الكلاسيكية والحديثة." data-en="Concerts by the most famous Arab artists from different countries, combining authenticity and modernity. Concerts presenting the best classical and modern Arabic songs.">حفلات لأشهر الفنانين العرب من مختلف الدول، تجمع بين الأصالة والحداثة. حفلات تقدم أفضل الأغاني العربية الكلاسيكية والحديثة.</p>
+                </div>
+                
+                <div class="concert-card">
+                    <h3 data-ar="حفلات الفنانين العالميين" data-en="International Artists Concerts">حفلات الفنانين العالميين</h3>
+                    <p data-ar="حفلات لأشهر الفنانين العالميين من مختلف أنحاء العالم، تقدم أفضل الأغاني العالمية. حفلات تجذب جماهير من جميع الجنسيات." data-en="Concerts by the most famous international artists from around the world, presenting the best global songs. Concerts that attract audiences from all nationalities.">حفلات لأشهر الفنانين العالميين من مختلف أنحاء العالم، تقدم أفضل الأغاني العالمية. حفلات تجذب جماهير من جميع الجنسيات.</p>
+                </div>
+                
+                <div class="concert-card">
+                    <h3 data-ar="الحفلات الكلاسيكية" data-en="Classical Concerts">الحفلات الكلاسيكية</h3>
+                    <p data-ar="حفلات موسيقية كلاسيكية تقدمها أوركسترا عالمية، تجمع بين الموسيقى الشرقية والغربية. حفلات تقدم تجربة موسيقية فريدة ومميزة." data-en="Classical musical concerts presented by international orchestras, combining Eastern and Western music. Concerts that provide a unique and distinctive musical experience.">حفلات موسيقية كلاسيكية تقدمها أوركسترا عالمية، تجمع بين الموسيقى الشرقية والغربية. حفلات تقدم تجربة موسيقية فريدة ومميزة.</p>
+                </div>
+                
+                <div class="concert-card">
+                    <h3 data-ar="حفلات الموسيقى الشعبية" data-en="Folk Music Concerts">حفلات الموسيقى الشعبية</h3>
+                    <p data-ar="حفلات للموسيقى الشعبية التقليدية من مختلف دول العالم، تعرض التراث الموسيقي الأصيل. حفلات تتيح التعرف على الثقافات المختلفة." data-en="Concerts of traditional folk music from different countries around the world, showcasing authentic musical heritage. Concerts that allow learning about different cultures.">حفلات للموسيقى الشعبية التقليدية من مختلف دول العالم، تعرض التراث الموسيقي الأصيل. حفلات تتيح التعرف على الثقافات المختلفة.</p>
+                </div>
+                
+                <div class="concert-card">
+                    <h3 data-ar="حفلات الموسيقى الحديثة" data-en="Modern Music Concerts">حفلات الموسيقى الحديثة</h3>
+                    <p data-ar="حفلات للموسيقى الحديثة والمعاصرة، تقدم أفضل الأغاني الحالية. حفلات تجمع بين الإلكترونية والآلات التقليدية." data-en="Concerts of modern and contemporary music, presenting the best current songs. Concerts that combine electronic and traditional instruments.">حفلات للموسيقى الحديثة والمعاصرة، تقدم أفضل الأغاني الحالية. حفلات تجمع بين الإلكترونية والآلات التقليدية.</p>
+                </div>
+                
+                <div class="concert-card">
+                    <h3 data-ar="الحفلات التفاعلية" data-en="Interactive Concerts">الحفلات التفاعلية</h3>
+                    <p data-ar="حفلات تفاعلية تتيح للجمهور المشاركة في الأداء، تجمع بين الترفيه والتعلم. حفلات تناسب جميع الأعمار وتقدم تجربة فريدة." data-en="Interactive concerts that allow the audience to participate in the performance, combining entertainment and learning. Concerts suitable for all ages and provide a unique experience.">حفلات تفاعلية تتيح للجمهور المشاركة في الأداء، تجمع بين الترفيه والتعلم. حفلات تناسب جميع الأعمار وتقدم تجربة فريدة.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="../../index.php" class="back-btn" data-ar="العودة للصفحة الرئيسية" data-en="Back to Homepage">العودة للصفحة الرئيسية</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-ar="ليه الرياض؟" data-en="Why Riyadh?">ليه الرياض؟</h3>
+                    <p data-ar="منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية." data-en="A comprehensive platform to introduce Riyadh city and attract tourists and residents to discover the capital of Saudi Arabia.">منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a></li>
+                        <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية" data-en="Tourist Places">الأماكن السياحية</a>
+                        </li>
+                        <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد" data-en="Culture & Traditions">الثقافة
+                                والتقاليد</a></li>
+                        <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                        <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه" data-en="Shopping & Entertainment">التسوق
+                                والترفيه</a></li>
+                        <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض" data-en="Tell Us About Riyadh">كلمنا عن
+                                الرياض</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="معلومات الاتصال" data-en="Contact Information">معلومات الاتصال</h3>
+                    <ul class="footer-links">
+                        <li data-ar="الهاتف: 011 123 4567" data-en="Phone: 011 123 4567">الهاتف: 011 123 4567</li>
+                        <li data-ar="البريد الإلكتروني: info@riyadhwhy.com" data-en="Email: info@riyadhwhy.com">البريد
+                            الإلكتروني: info@whyriyadh.com</li>
+                        <li data-ar="العنوان: الرياض، المملكة العربية السعودية" data-en="Address: Riyadh, Saudi Arabia">
+                            العنوان: الرياض، المملكة العربية السعودية</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 data-ar="تابعنا" data-en="Follow Us">تابعنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-ar="تويتر" data-en="Twitter">تويتر</a></li>
+                        <li><a href="#" data-ar="انستغرام" data-en="Instagram">انستغرام</a></li>
+                        <li><a href="#" data-ar="فيسبوك" data-en="Facebook">فيسبوك</a></li>
+                        <li><a href="#" data-ar="يوتيوب" data-en="YouTube">يوتيوب</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p data-ar="جميع الحقوق محفوظة &copy;2025 ليه الرياض؟"
+                    data-en="All rights reserved &copy;2025 Why Riyadh?">جميع الحقوق محفوظة &copy;2025 ليه الرياض؟</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentLanguage = 'ar';
+        
+        // تعيين dir عند تحميل الصفحة
+        document.documentElement.dir = 'rtl';
+        
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
+                const text = lang === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+                if (text) {
+                    // التحقق من وجود وسوم HTML في النص (مثل <br>)
+                    // إذا كان النص يحتوي على HTML، نستخدم innerHTML
+                    // وإلا نستخدم textContent للأمان
+                    if (text.includes('<br') || text.includes('<BR')) {
+                        element.innerHTML = text;
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+        }
+        
+        document.getElementById('languageSelect').addEventListener('change', function() {
+            changeLanguage(this.value);
+        });
+
+        // قائمة البرجر
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('nav');
+
+        if (hamburger && nav) {
+            hamburger.addEventListener('click', function () {
+                this.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            // إغلاق القائمة عند النقر على رابط
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function () {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأحداث الرياضية - ليه الرياض؟</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+        :root {
+            --color1: #fff4e3;
+            --color2: #fdf4e4;
+            --color3: #fce7cc;
+            --color4: #AB7E50;
+            --color5: #aea56d;
+            --color6: #255c46;
+            --dark-bg: var(--color1);
+            --dark-text: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--color6), var(--color5));
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color3);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--color4);
+        }
+
+        /* قائمة البرجر */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color2);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li {
+            position: relative;
+            text-align: center;
+        }
+
+        nav ul li a {
+            color: var(--color2);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--color4);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .language-switcher select {
+            background-color: var(--color6);
+            color: var(--color2);
+            border: 1px solid var(--color5);
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .language-switcher select:hover {
+            background-color: var(--color5);
+            transform: scale(1.05);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://www.almowaten.net/wp-content/uploads/2021/12/FFxTgh1XMAAJrLl-799x533.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color2);
+            margin-bottom: 40px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--color4);
+        }
+        
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--color4);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color5), var(--color4));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .sport-card {
+            background: linear-gradient(135deg, rgba(37, 92, 70, 0.3), rgba(174, 165, 109, 0.2));
+            border-radius: 15px;
+            padding: 30px;
+            border-right: 5px solid var(--color4);
+            transition: all 0.3s ease;
+        }
+        
+        .sport-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sport-card h3 {
+            color: var(--color4);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .sport-card p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--color4), var(--color5));
+            color: var(--dark-bg);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(45deg, var(--color5), var(--color4));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--color4);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            color: var(--color1);
+        }
+
+        .footer-links li {
+            color: var(--color1);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--color1);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color4);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color1);
+        }
+
+        .gallery-section {
+            margin: 60px 0;
+        }
+
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gallery-title h2 {
+            font-size: 2.5rem;
+            color: var(--color4);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .gallery-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color5), var(--color4));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            aspect-ratio: 4/3;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: linear-gradient(135deg, var(--color6), var(--color5));
+                transition: right 0.3s ease;
+                z-index: 1000;
+                padding-top: 80px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 1.2rem;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                margin: 5px 0;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .language-switcher {
+                margin-left: auto;
+                margin-right: 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .gallery-title h2 {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none !important;
+            }
+
+            nav {
+                position: static !important;
+                width: auto !important;
+                height: auto !important;
+                background: none !important;
+                padding-top: 0 !important;
+            }
+
+            nav ul {
+                flex-direction: row !important;
+                align-items: center !important;
+                padding: 0 !important;
+            }
+
+            nav ul li {
+                width: auto !important;
+                margin: 2px;
+            }
+
+            nav ul li a {
+                display: inline-block !important;
+                padding: 8px !important;
+                font-size: 1.3rem !important;
+                border-radius: 4px !important;
+                background: none !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a data-en="Why Riyadh?" href="../../index.php" class="logo"><img src="../../assets/images/Logo.png" alt="الشعار"
+                    style="height: auto; width: 100px;"></a>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a></li>
+                    <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية" data-en="Tourist Places">الأماكن السياحية</a></li>
+                    <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد" data-en="Culture & Traditions">الثقافة والتقاليد</a></li>
+                    <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                    <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه" data-en="Shopping & Entertainment">التسوق والترفيه</a></li>
+                    <li><a href="../../index.php#guide" data-ar="دليل الزائر" data-en="Visitor Guide">دليل الزائر</a></li>
+                    <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض" data-en="Tell Us About Riyadh">كلمنا عن الرياض</a></li>
+                    <li><a href="../../index.php#contact" data-ar="اتصل بنا" data-en="Contact Us">اتصل بنا</a></li>
+                </ul>
+            </nav>
+            
+            <div class="language-switcher">
+                <select id="languageSelect" title="اختر اللغة / Choose Language" aria-label="اختر اللغة / Choose Language">
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 data-ar="الأحداث الرياضية في الرياض" data-en="Sports Events in Riyadh">الأحداث الرياضية في الرياض</h1>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-ar="شاهد أهم الأحداث الرياضية" data-en="Watch the Most Important Sports Events">شاهد أهم الأحداث الرياضية</h2>
+            </div>
+            
+            <div class="content">
+                <div class="sports-grid">
+                    <div class="sport-card">
+                        <h3 data-ar="بطولة WTA Finals Riyadh 2025" data-en="WTA Finals Riyadh 2025 Championship">بطولة WTA Finals Riyadh 2025</h3>
+                        <p data-ar="نهائي بطولة التنس للسيدات في ملعب جامعة الملك سعود." data-en="Women's Tennis Championship Finals at King Saud University Stadium.">نهائي بطولة التنس للسيدات في ملعب جامعة الملك سعود.</p>
+                    </div>
+                    
+                    <div class="sport-card">
+                        <h3 data-ar="أمسية سباقات موسم الرياض" data-en="Riyadh Season Racing Evening">أمسية سباقات موسم الرياض</h3>
+                        <p data-ar="يحتضنها ميدان الملك عبدالعزيز للفروسية الوجهة الأبرز لسباقات الخيل في المملكة." data-en="Hosted by King Abdulaziz Equestrian Field, the premier destination for horse racing in the Kingdom.">يحتضنها ميدان الملك عبدالعزيز للفروسية الوجهة الأبرز لسباقات الخيل في المملكة.</p>
+                    </div>
+                    
+                    <div class="sport-card">
+                        <h3 data-ar="بطولة موسم الرياض للسنوكر" data-en="Riyadh Season Snooker Championship">بطولة موسم الرياض للسنوكر</h3>
+                        <p data-ar="حدث رياضي عالمي لا يُفوّت يجمع أفضل 10 لاعبي سنوكر." data-en="An unmissable global sporting event bringing together the top 10 snooker players.">حدث رياضي عالمي لا يُفوّت يجمع أفضل 10 لاعبي سنوكر.</p>
+                    </div>
+                    
+                    <div class="sport-card">
+                        <h3 data-ar="ليلة الساموراي" data-en="Night of the Samurai">ليلة الساموراي</h3>
+                        <p data-ar="لحظة من التاريخ مع أعظم ملاكمي اليابان في مواجهات عالمية بالرياض." data-en="A moment from history with Japan's greatest boxers in global matches in Riyadh.">لحظة من التاريخ مع أعظم ملاكمي اليابان في مواجهات عالمية بالرياض.</p>
+                    </div>
+                    
+                    <div class="sport-card">
+                        <h3 data-ar="بطولة PFL MENA CHAMPIONSHIP PFL MENA 4" data-en="PFL MENA CHAMPIONSHIP PFL MENA 4">بطولة PFL MENA CHAMPIONSHIP PFL MENA 4</h3>
+                        <p data-ar="أكبر أمسية في تاريخ فنون القتال المختلطة، أربع أحزمة بطولات ستكون على المحك حيث يتنافس أفضل المقاتلين من مختلف أنحاء الشرق الأوسط وشمال أفريقيا." data-en="The biggest evening in the history of mixed martial arts, four championship belts will be at stake as the best fighters from across the Middle East and North Africa compete.">أكبر أمسية في تاريخ فنون القتال المختلطة، أربع أحزمة بطولات ستكون على المحك حيث يتنافس أفضل المقاتلين من مختلف أنحاء الشرق الأوسط وشمال أفريقيا.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sports-grid" style="display:none;">
+                <div class="sport-card">
+                    <h3 data-ar="كأس دوري أبطال آسيا" data-en="AFC Champions League">كأس دوري أبطال آسيا</h3>
+                    <p data-ar="أهم بطولة كرة قدم في آسيا، تجمع بين أفضل الأندية الآسيوية. مباريات مثيرة تجذب جماهير من جميع أنحاء القارة وتقدم مستوى عالي من المنافسة." data-en="The most important football championship in Asia, bringing together the best Asian clubs. Exciting matches that attract audiences from across the continent and provide a high level of competition.">أهم بطولة كرة قدم في آسيا، تجمع بين أفضل الأندية الآسيوية. مباريات مثيرة تجذب جماهير من جميع أنحاء القارة وتقدم مستوى عالي من المنافسة.</p>
+                </div>
+                
+                <div class="sport-card">
+                    <h3 data-ar="سباق الفورمولا إي" data-en="Formula E Races">سباق الفورمولا إي</h3>
+                    <p data-ar="سباقات سيارات كهربائية عالية التقنية، تجمع بين السرعة والاستدامة. سباقات مثيرة تجذب محبي السيارات والرياضة من جميع أنحاء العالم." data-en="High-tech electric car races that combine speed and sustainability. Exciting races that attract car and sports enthusiasts from around the world.">سباقات سيارات كهربائية عالية التقنية، تجمع بين السرعة والاستدامة. سباقات مثيرة تجذب محبي السيارات والرياضة من جميع أنحاء العالم.</p>
+                </div>
+                
+                <div class="sport-card">
+                    <h3 data-ar="بطولات التنس العالمية" data-en="World Tennis Championships">بطولات التنس العالمية</h3>
+                    <p data-ar="بطولات تنس عالمية تجمع بين أفضل اللاعبين في العالم، تقدم مستوى عالي من المنافسة والإثارة. بطولات تجذب محبي التنس من جميع أنحاء العالم." data-en="World tennis championships bringing together the best players in the world, providing a high level of competition and excitement. Championships that attract tennis lovers from around the world.">بطولات تنس عالمية تجمع بين أفضل اللاعبين في العالم، تقدم مستوى عالي من المنافسة والإثارة. بطولات تجذب محبي التنس من جميع أنحاء العالم.</p>
+                </div>
+                
+                <div class="sport-card">
+                    <h3 data-ar="بطولات كرة السلة" data-en="Basketball Championships">بطولات كرة السلة</h3>
+                    <p data-ar="بطولات كرة سلة محلية ودولية، تجمع بين أفضل الفرق واللاعبين. مباريات مثيرة تجذب جماهير من جميع الأعمار وتقدم مستوى عالي من المنافسة." data-en="Local and international basketball championships, bringing together the best teams and players. Exciting matches that attract audiences of all ages and provide a high level of competition.">بطولات كرة سلة محلية ودولية، تجمع بين أفضل الفرق واللاعبين. مباريات مثيرة تجذب جماهير من جميع الأعمار وتقدم مستوى عالي من المنافسة.</p>
+                </div>
+                
+                <div class="sport-card">
+                    <h3 data-ar="بطولات السباحة" data-en="Swimming Championships">بطولات السباحة</h3>
+                    <p data-ar="بطولات سباحة محلية ودولية، تجمع بين أفضل السباحين في العالم. مسابقات مثيرة تجذب محبي السباحة وتقدم مستوى عالي من المنافسة." data-en="Local and international swimming championships, bringing together the best swimmers in the world. Exciting competitions that attract swimming enthusiasts and provide a high level of competition.">بطولات سباحة محلية ودولية، تجمع بين أفضل السباحين في العالم. مسابقات مثيرة تجذب محبي السباحة وتقدم مستوى عالي من المنافسة.</p>
+                </div>
+                
+                <div class="sport-card">
+                    <h3 data-ar="بطولات ألعاب القوى" data-en="Athletics Championships">بطولات ألعاب القوى</h3>
+                    <p data-ar="بطولات ألعاب قوى محلية ودولية، تجمع بين أفضل الرياضيين في العالم. مسابقات مثيرة تجذب محبي ألعاب القوى وتقدم مستوى عالي من المنافسة." data-en="Local and international athletics championships, bringing together the best athletes in the world. Exciting competitions that attract athletics enthusiasts and provide a high level of competition.">بطولات ألعاب قوى محلية ودولية، تجمع بين أفضل الرياضيين في العالم. مسابقات مثيرة تجذب محبي ألعاب القوى وتقدم مستوى عالي من المنافسة.</p>
+                </div>
+            </div>
+
+            <div class="gallery-section">
+                <div class="gallery-title">
+                    <h2 data-ar="معرض صور الأحداث الرياضية" data-en="Sports Events Gallery">معرض صور الأحداث الرياضية</h2>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="../../assets/images/Concerts/WhatsApp Image 2025-11-15 at 5.06.48 AM.jpeg"
+                            alt="الأحداث الرياضية">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../../assets/images/Concerts/WhatsApp Image 2025-11-15 at 5.06.49 AM.jpeg"
+                            alt="الأحداث الرياضية">
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="../../index.php" class="back-btn" data-ar="العودة للصفحة الرئيسية" data-en="Back to Homepage">العودة للصفحة الرئيسية</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-ar="ليه الرياض؟" data-en="Why Riyadh?">ليه الرياض؟</h3>
+                    <p data-ar="منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية." data-en="A comprehensive platform to introduce Riyadh city and attract tourists and residents to discover the capital of Saudi Arabia.">منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a></li>
+                        <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية" data-en="Tourist Places">الأماكن السياحية</a>
+                        </li>
+                        <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد" data-en="Culture & Traditions">الثقافة
+                                والتقاليد</a></li>
+                        <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                        <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه" data-en="Shopping & Entertainment">التسوق
+                                والترفيه</a></li>
+                        <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض" data-en="Tell Us About Riyadh">كلمنا عن
+                                الرياض</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="معلومات الاتصال" data-en="Contact Information">معلومات الاتصال</h3>
+                    <ul class="footer-links">
+                        <li data-ar="الهاتف: 011 123 4567" data-en="Phone: 011 123 4567">الهاتف: 011 123 4567</li>
+                        <li data-ar="البريد الإلكتروني: info@riyadhwhy.com" data-en="Email: info@riyadhwhy.com">البريد
+                            الإلكتروني: info@whyriyadh.com</li>
+                        <li data-ar="العنوان: الرياض، المملكة العربية السعودية" data-en="Address: Riyadh, Saudi Arabia">
+                            العنوان: الرياض، المملكة العربية السعودية</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 data-ar="تابعنا" data-en="Follow Us">تابعنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-ar="تويتر" data-en="Twitter">تويتر</a></li>
+                        <li><a href="#" data-ar="انستغرام" data-en="Instagram">انستغرام</a></li>
+                        <li><a href="#" data-ar="فيسبوك" data-en="Facebook">فيسبوك</a></li>
+                        <li><a href="#" data-ar="يوتيوب" data-en="YouTube">يوتيوب</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p data-ar="جميع الحقوق محفوظة &copy;2025 ليه الرياض؟"
+                    data-en="All rights reserved &copy;2025 Why Riyadh?">جميع الحقوق محفوظة &copy;2025 ليه الرياض؟</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentLanguage = 'ar';
+        
+        // تعيين dir عند تحميل الصفحة
+        document.documentElement.dir = 'rtl';
+        
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
+                const text = lang === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+                if (text) {
+                    // التحقق من وجود وسوم HTML في النص (مثل <br>)
+                    // إذا كان النص يحتوي على HTML، نستخدم innerHTML
+                    // وإلا نستخدم textContent للأمان
+                    if (text.includes('<br') || text.includes('<BR')) {
+                        element.innerHTML = text;
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+        }
+        
+        document.getElementById('languageSelect').addEventListener('change', function() {
+            changeLanguage(this.value);
+        });
+
+        // قائمة البرجر
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('nav');
+
+        if (hamburger && nav) {
+            hamburger.addEventListener('click', function () {
+                this.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            // إغلاق القائمة عند النقر على رابط
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function () {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

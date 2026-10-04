@@ -1,0 +1,21 @@
+.env
+.env.*
+!.env.example
+.htpasswd
+node_modules/
+venv/
+.venv/
+__pycache__/
+.dart_tool/
+build/
+.gradle/
+.vs/
+*.pyc
+*.p8
+*adminsdk*.json
+*client_secret*.json
+uploads/targets/
+assets/suq al-awwalin/فديو.MOV
+assets/videos/المقابلات.MP4
+assets/videos/Arts/السامري.mov
+assets/videos/Arts/العرضة النجدية.mov

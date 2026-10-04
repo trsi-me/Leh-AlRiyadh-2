@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المعالم الطبيعية - ليه الرياض؟</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+
+        :root {
+            --color1: #fff4e3;
+            --color2: #fdf4e4;
+            --color3: #fce7cc;
+            --color4: #AB7E50;
+            --color5: #aea56d;
+            --color6: #255c46;
+            --dark-bg: var(--color1);
+            --dark-text: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--color6), var(--color5));
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color3);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--color4);
+        }
+
+        /* قائمة البرجر */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color2);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            position: relative;
+            text-align: center;
+        }
+
+        nav ul li a {
+            color: var(--color2);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--color4);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-switcher select {
+            background-color: var(--color6);
+            color: var(--color2);
+            border: 1px solid var(--color5);
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .language-switcher select:hover {
+            background-color: var(--color5);
+            transform: scale(1.05);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://th.bing.com/th/id/R.2c2c167cec9e2067a0aec735ed5f5418?rik=rDGoPe10Xcmvfg&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color2);
+            margin-bottom: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--color4);
+        }
+
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--color4);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color5), var(--color4));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .landmarks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .landmark-card {
+            background: linear-gradient(135deg, rgba(37, 92, 70, 0.3), rgba(174, 165, 109, 0.2));
+            border-radius: 15px;
+            padding: 30px;
+            border-right: 5px solid var(--color4);
+            transition: all 0.3s ease;
+        }
+
+        .landmark-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .landmark-card h3 {
+            color: var(--color4);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .landmark-card p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .natural-landmark-card {
+            background: linear-gradient(135deg, rgba(37, 92, 70, 0.1), rgba(174, 165, 109, 0.1));
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-right: 4px solid var(--color4);
+            transition: all 0.3s ease;
+            text-align: right;
+        }
+
+        .natural-landmark-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .natural-landmark-card h3 {
+            color: var(--color4);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .natural-landmark-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        .natural-landmark-card img {
+            max-width: 40%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .natural-landmark-card .image-gallery {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .natural-landmark-card .image-gallery img {
+            max-width: 35%;
+            margin: 0;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--color4), var(--color5));
+            color: var(--dark-bg);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(45deg, var(--color5), var(--color4));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: var(--color4);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            color: var(--color1);
+        }
+
+        .footer-links li {
+            color: var(--color1);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--color1);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color4);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color1);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: linear-gradient(135deg, var(--color6), var(--color5));
+                transition: right 0.3s ease;
+                z-index: 1000;
+                padding-top: 80px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 1.2rem;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                margin: 5px 0;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .language-switcher {
+                margin-left: auto;
+                margin-right: 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .natural-landmark-card img {
+                max-width: 45%;
+            }
+
+            .natural-landmark-card .image-gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .natural-landmark-card .image-gallery img {
+                max-width: 60%;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none !important;
+            }
+
+            nav {
+                position: static !important;
+                width: auto !important;
+                height: auto !important;
+                background: none !important;
+                padding-top: 0 !important;
+            }
+
+            nav ul {
+                flex-direction: row !important;
+                align-items: center !important;
+                padding: 0 !important;
+            }
+
+            nav ul li {
+                width: auto !important;
+                margin: 2px;
+            }
+
+            nav ul li a {
+                display: inline-block !important;
+                padding: 8px !important;
+                font-size: 1.3rem !important;
+                border-radius: 4px !important;
+                background: none !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-container">
+            <a data-en="Why Riyadh?" href="../../index.php" class="logo"><img src="../../assets/images/Logo.png" alt="الشعار"
+                    style="height: auto; width: 100px;"></a>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a></li>
+                    <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية" data-en="Tourist Places">الأماكن السياحية</a></li>
+                    <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد" data-en="Culture & Traditions">الثقافة والتقاليد</a></li>
+                    <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                    <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه" data-en="Shopping & Entertainment">التسوق والترفيه</a></li>
+                    <li><a href="../../index.php#guide" data-ar="دليل الزائر" data-en="Visitor Guide">دليل الزائر</a></li>
+                    <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض" data-en="Tell Us About Riyadh">كلمنا عن الرياض</a></li>
+                    <li><a href="../../index.php#contact" data-ar="اتصل بنا" data-en="Contact Us">اتصل بنا</a></li>
+                </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <select id="languageSelect" title="اختر اللغة / Choose Language"
+                    aria-label="اختر اللغة / Choose Language">
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 data-ar="المعالم الطبيعية في الرياض" data-en="Natural Landmarks in Riyadh">المعالم الطبيعية في الرياض
+            </h1>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-ar="استمتع بالطبيعة الخلابة" data-en="Enjoy Beautiful Nature">استمتع بالطبيعة الخلابة</h2>
+            </div>
+
+            <div class="content">
+                <p>على الرغم من كون الرياض مدينة حديثة تتميز بعمرانها المتطور، إلا أنها تحتضن عددًا من المعالم الطبيعية والصحراوية التي تشكّل متنفسًا لسكانها وزوارها. وتمزج هذه المواقع بين الأودية والجبال والمساحات الخضراء، مما يجعلها وجهات مثالية للاستجمام وقضاء الوقت في أجواء هادئة وطبيعية.</p>
+            </div>
+
+            <!-- وادي حنيفة -->
+            <div class="natural-landmark-card">
+                <h3>وادي حنيفة</h3>
+                <p>يُعد وادي حنيفة من أبرز المعالم الطبيعية في غرب الرياض، ويمتد على مساحة واسعة تم تطويرها لتكون واحة بيئية متكاملة. يضم الوادي مسارات للمشي، ومناطق جلوس مظللة، وساحات خضراء تمنح الزائر تجربة مريحة وسط الطبيعة.</p>
+                <p>كما يتميّز الوادي بنظافته العالية، وتوفّر المواقف الواسعة، واللوحات الإرشادية، إضافة إلى وجود دورات مياه وخدمات أساسية تناسب العائلات والمتنزهين.</p>
+                <div class="image-gallery">
+                    <img src="../../assets/images/Natural landmarks/Wadi Hanifa1.jpeg" alt="وادي حنيفة">
+                    <img src="../../assets/images/Natural landmarks/Wadi Hanifa2.jpeg" alt="وادي حنيفة">
+                </div>
+            </div>
+
+            <!-- وادي نمار -->
+            <div class="natural-landmark-card">
+                <h3>وادي نمار</h3>
+                <p>يمثل وادي نمار واحدة من أجمل الوجهات الطبيعية في المدينة، ويشتهر ببحيرته الهادئة التي تحيط بها الجبال، مما يمنح الزوار إطلالة فريدة وجوًا لطيفًا خصوصًا في فترات المساء.</p>
+                <p>ويضم المكان ممشى طويلًا مناسبًا للمشي والجري والتصوير، إلى جانب جلسات متعددة، مواقف سيارات، إضاءة ليلية جميلة، وبعض الأكشاك التي تخدم الزوار.</p>
+                <p>كما ساهمت التحسينات البيئية في جعله من أكثر المواقع زيارة، خاصةً للعائلات.</p>
+                <div class="image-gallery">
+                    <img src="../../assets/images/Natural landmarks/Wadi Namar1.jpeg" alt="وادي نمار">
+                    <img src="../../assets/images/Natural landmarks/Wadi Namar2.jpeg" alt="وادي نمار">
+                </div>
+            </div>
+
+            <!-- حديقة السويدي -->
+            <div class="natural-landmark-card">
+                <h3>حديقة السويدي</h3>
+                <p>تعد حديقة السويدي من أبرز الحدائق في جنوب الرياض، وتتميز بمساحاتها الخضراء الواسعة ومرافقها المتنوعة. كما تستضيف فعاليات كبيرة خلال موسم الرياض، تشمل عروضًا ثقافية، ومناطق طعام، ومسرحيات، وتجارب ترفيهية تجعلها نقطة جذب مهمة للسكان والسياح.</p>
+                <p>وتضم الحديقة ممرات للمشي، ملاعب أطفال، مناطق جلوس مظللة، إضافة إلى مطاعم وأكشاك متنوعة.</p>
+                <p>وعند وجود فعاليات موسمية، يتطلب الدخول حجزًا مسبقًا، بينما تكون مفتوحة للزيارة دون حجز في الأيام العادية.</p>
+                <div class="image-gallery">
+                    <img src="../../assets/images/Natural landmarks/Al Suwaidi Park.jpeg" alt="حديقة السويدي">
+                    <img src="../../assets/images/Natural landmarks/Al Suwaidi Park2.jpeg" alt="حديقة السويدي">
+                </div>
+            </div>
+
+            <!-- واحة نجد -->
+            <div class="natural-landmark-card">
+                <h3>واحة نجد</h3>
+                <p>تُعد واحة نجد من المواقع الطبيعية المميزة في شمال الرياض، وتتميز بإطلالاتها المباشرة على برج المملكة وبرج الفيصلية من مسافات مثالية، مما يمنح المكان طابعًا حضريًا جميلًا وسط أجواء طبيعية مفتوحة.</p>
+                <p>وتقع الواحة بالقرب من مسارات مترو الرياض، ما يجعل الوصول إليها سهلاً للزوار دون الحاجة لقيادة طويلة. وتضم جلسات هادئة ونخيلًا متناثرًا يعكس الطابع النجدي البسيط.</p>
+                <p>وتعتبر الواحة خيارًا مناسبًا للعائلات ومحبي الاستمتاع بإطلالات المدينة من موقع طبيعي بعيد عن الازدحام وقريب في الوقت ذاته من قلب الرياض.</p>
+                <div class="image-gallery">
+                    <img src="../../assets/images/Natural landmarks/Oasis of Najd1.jpeg" alt="واحة نجد">
+                    <img src="../../assets/images/Natural landmarks/Oasis of Najd2.jpeg" alt="واحة نجد">
+                </div>
+            </div>
+
+            <div class="landmarks-grid" style="display:none;">
+                <div class="landmark-card">
+                    <h3 data-ar="وادي حنيفة" data-en="Wadi Hanifa">وادي حنيفة</h3>
+                    <p data-ar="وادي حنيفة هو أحد أهم المعالم الطبيعية في الرياض، يمتد عبر المدينة ويوفر مساحات خضراء واسعة. الوادي يشكل رئة خضراء للمدينة ويوفر مكاناً مثالياً للمشي والاسترخاء وسط الطبيعة."
+                        data-en="Wadi Hanifa is one of the most important natural landmarks in Riyadh, extending through the city and providing vast green spaces. The valley forms a green lung for the city and provides an ideal place for walking and relaxation in nature.">
+                        وادي حنيفة هو أحد أهم المعالم الطبيعية في الرياض، يمتد عبر المدينة ويوفر مساحات خضراء واسعة.
+                        الوادي يشكل رئة خضراء للمدينة ويوفر مكاناً مثالياً للمشي والاسترخاء وسط الطبيعة.</p>
+                </div>
+
+                <div class="landmark-card">
+                    <h3 data-ar="منتزه الثمامة" data-en="Thumama Park">منتزه الثمامة</h3>
+                    <p data-ar="منتزه الثمامة هو أحد أكبر المنتزهات في الرياض، يضم مساحات خضراء واسعة، بحيرات صناعية، ومرافق ترفيهية متنوعة. المنتزه يوفر مكاناً مثالياً للعائلات للاستمتاع بالطبيعة والأنشطة الترفيهية."
+                        data-en="Thumama Park is one of the largest parks in Riyadh, featuring vast green spaces, artificial lakes, and diverse entertainment facilities. The park provides an ideal place for families to enjoy nature and recreational activities.">
+                        منتزه الثمامة هو أحد أكبر المنتزهات في الرياض، يضم مساحات خضراء واسعة، بحيرات صناعية، ومرافق
+                        ترفيهية متنوعة. المنتزه يوفر مكاناً مثالياً للعائلات للاستمتاع بالطبيعة والأنشطة الترفيهية.</p>
+                </div>
+
+                <div class="landmark-card">
+                    <h3 data-ar="جبل طويق" data-en="Tuwaiq Mountain">جبل طويق</h3>
+                    <p data-ar="جبل طويق هو أحد المعالم الطبيعية البارزة في الرياض، يتميز بمناظره الخلابة وتضاريسه المتنوعة. الجبل يوفر فرصاً رائعة للتسلق والمشي لمسافات طويلة، مع إطلالات بانورامية على المدينة."
+                        data-en="Tuwaiq Mountain is one of the prominent natural landmarks in Riyadh, distinguished by its beautiful scenery and diverse terrain. The mountain provides excellent opportunities for climbing and long-distance hiking, with panoramic views of the city.">
+                        جبل طويق هو أحد المعالم الطبيعية البارزة في الرياض، يتميز بمناظره الخلابة وتضاريسه المتنوعة.
+                        الجبل يوفر فرصاً رائعة للتسلق والمشي لمسافات طويلة، مع إطلالات بانورامية على المدينة.</p>
+                </div>
+
+                <div class="landmark-card">
+                    <h3 data-ar="منتزه الملك سلمان" data-en="King Salman Park">منتزه الملك سلمان</h3>
+                    <p data-ar="منتزه الملك سلمان هو أحدث وأكبر المنتزهات في الرياض، يضم مساحات خضراء شاسعة، حدائق متنوعة، ومرافق ترفيهية متطورة. المنتزه يشكل وجهة مثالية للعائلات والسياح للاستمتاع بالطبيعة والترفيه."
+                        data-en="King Salman Park is the newest and largest park in Riyadh, featuring vast green spaces, diverse gardens, and advanced entertainment facilities. The park forms an ideal destination for families and tourists to enjoy nature and entertainment.">
+                        منتزه الملك سلمان هو أحدث وأكبر المنتزهات في الرياض، يضم مساحات خضراء شاسعة، حدائق متنوعة،
+                        ومرافق ترفيهية متطورة. المنتزه يشكل وجهة مثالية للعائلات والسياح للاستمتاع بالطبيعة والترفيه.
+                    </p>
+                </div>
+
+                <div class="landmark-card">
+                    <h3 data-ar="منتزه الملك عبدالله" data-en="King Abdullah Park">منتزه الملك عبدالله</h3>
+                    <p data-ar="منتزه الملك عبدالله هو منتزه حديث يضم مساحات خضراء واسعة، بحيرات صناعية، ومرافق ترفيهية متنوعة. المنتزه يوفر مكاناً مثالياً للاسترخاء والاستمتاع بالطبيعة في قلب المدينة."
+                        data-en="King Abdullah Park is a modern park featuring vast green spaces, artificial lakes, and diverse entertainment facilities. The park provides an ideal place for relaxation and enjoying nature in the heart of the city.">
+                        منتزه الملك عبدالله هو منتزه حديث يضم مساحات خضراء واسعة، بحيرات صناعية، ومرافق ترفيهية متنوعة.
+                        المنتزه يوفر مكاناً مثالياً للاسترخاء والاستمتاع بالطبيعة في قلب المدينة.</p>
+                </div>
+
+                <div class="landmark-card">
+                    <h3 data-ar="منتزه السلام" data-en="Al-Salam Park">منتزه السلام</h3>
+                    <p data-ar="منتزه السلام هو منتزه صغير وجميل يقع في قلب الرياض، يضم مساحات خضراء، أشجار ظليلة، ومرافق ترفيهية بسيطة. المنتزه يوفر مكاناً هادئاً للاسترخاء والاستمتاع بالطبيعة."
+                        data-en="Al-Salam Park is a small and beautiful park located in the heart of Riyadh, featuring green spaces, shady trees, and simple entertainment facilities. The park provides a quiet place for relaxation and enjoying nature.">
+                        منتزه السلام هو منتزه صغير وجميل يقع في قلب الرياض، يضم مساحات خضراء، أشجار ظليلة، ومرافق
+                        ترفيهية بسيطة. المنتزه يوفر مكاناً هادئاً للاسترخاء والاستمتاع بالطبيعة.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="../../index.php" class="back-btn" data-ar="العودة للصفحة الرئيسية"
+                    data-en="Back to Homepage">العودة للصفحة الرئيسية</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-ar="ليه الرياض؟" data-en="Why Riyadh?">ليه الرياض؟</h3>
+                    <p data-ar="منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية."
+                        data-en="A comprehensive platform to introduce Riyadh city and attract tourists and residents to discover the capital of Saudi Arabia.">
+                        منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a></li>
+                        <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية" data-en="Tourist Places">الأماكن السياحية</a></li>
+                        <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد" data-en="Culture & Traditions">الثقافة والتقاليد</a></li>
+                        <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                        <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه" data-en="Shopping & Entertainment">التسوق والترفيه</a></li>
+                        <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض" data-en="Tell Us About Riyadh">كلمنا عن الرياض</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="معلومات الاتصال" data-en="Contact Information">معلومات الاتصال</h3>
+                    <ul class="footer-links">
+                        <li data-ar="الهاتف: 011 123 4567" data-en="Phone: 011 123 4567">الهاتف: 011 123 4567</li>
+                        <li data-ar="البريد الإلكتروني: info@whyriyadh.com" data-en="Email: info@whyriyadh.com">البريد
+                            الإلكتروني: info@whyriyadh.com</li>
+                        <li data-ar="العنوان: الرياض، المملكة العربية السعودية" data-en="Address: Riyadh, Saudi Arabia">
+                            العنوان: الرياض، المملكة العربية السعودية</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="تابعنا" data-en="Follow Us">تابعنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-ar="تويتر" data-en="Twitter">تويتر</a></li>
+                        <li><a href="#" data-ar="انستغرام" data-en="Instagram">انستغرام</a></li>
+                        <li><a href="#" data-ar="فيسبوك" data-en="Facebook">فيسبوك</a></li>
+                        <li><a href="#" data-ar="يوتيوب" data-en="YouTube">يوتيوب</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p data-ar="جميع الحقوق محفوظة &copy;2025 ليه الرياض؟"
+                    data-en="All rights reserved &copy;2025 Why Riyadh?">جميع الحقوق محفوظة &copy;2025 ليه الرياض؟</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentLanguage = 'ar';
+        
+        // تعيين dir عند تحميل الصفحة
+        document.documentElement.dir = 'rtl';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
+                const text = lang === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+                if (text) {
+                    // التحقق من وجود وسوم HTML في النص (مثل <br>)
+                    // إذا كان النص يحتوي على HTML، نستخدم innerHTML
+                    // وإلا نستخدم textContent للأمان
+                    if (text.includes('<br') || text.includes('<BR')) {
+                        element.innerHTML = text;
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+        }
+
+        document.getElementById('languageSelect').addEventListener('change', function () {
+            changeLanguage(this.value);
+        });
+
+        // قائمة البرجر
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('nav');
+
+        if (hamburger && nav) {
+            hamburger.addEventListener('click', function () {
+                this.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            // إغلاق القائمة عند النقر على رابط
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function () {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

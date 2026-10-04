@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفنادق والإقامة - ليه الرياض؟</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+
+        :root {
+            --color1: #fff4e3;
+            --color2: #fdf4e4;
+            --color3: #fce7cc;
+            --color4: #AB7E50;
+            --color5: #aea56d;
+            --color6: #255c46;
+            --dark-bg: var(--color1);
+            --dark-text: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--color6), var(--color5));
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color3);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--color4);
+        }
+
+        /* قائمة البرجر */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color2);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            position: relative;
+            text-align: center;
+        }
+
+        nav ul li a {
+            color: var(--color2);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--color4);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-switcher select {
+            background-color: var(--color6);
+            color: var(--color2);
+            border: 1px solid var(--color5);
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .language-switcher select:hover {
+            background-color: var(--color5);
+            transform: scale(1.05);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://lh6.googleusercontent.com/W9cxVV_WsMVEgafU-CVRD75YkNdnvZJ-FFsc-iI5hvJixebEXKydgqiboc1sllo_njVCQCmq7hv_RFOxqS9CLdipS07m3kOcXfvPecktsPP363wnCHaFAogH5z5TNM3qtvWmeusBOHVFJdR9aV3Q2bg');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color2);
+            margin-bottom: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--color4);
+        }
+
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--color4);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color5), var(--color4));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .accommodations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .accommodation-card {
+            background: linear-gradient(135deg, rgba(37, 92, 70, 0.3), rgba(174, 165, 109, 0.2));
+            border-radius: 15px;
+            padding: 30px;
+            border-right: 5px solid var(--color4);
+            transition: all 0.3s ease;
+        }
+
+        .accommodation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .accommodation-card h3 {
+            color: var(--color4);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .accommodation-card p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .hotel-card {
+            background: linear-gradient(135deg, rgba(37, 92, 70, 0.1), rgba(174, 165, 109, 0.1));
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-right: 4px solid var(--color4);
+            transition: all 0.3s ease;
+            text-align: right;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .hotel-card h3 {
+            color: var(--color4);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hotel-card .stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+        }
+
+        .hotel-card img {
+            max-width: 40%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .hotel-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        .hotel-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: right;
+        }
+
+        .hotel-card ul li {
+            padding: 8px 0;
+            padding-right: 25px;
+            position: relative;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .hotel-card ul li::before {
+            content: "•";
+            position: absolute;
+            right: 0;
+            color: var(--color4);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .hotel-price {
+            background: linear-gradient(135deg, rgba(37, 92, 70, 0.2), rgba(174, 165, 109, 0.2));
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--color4);
+        }
+
+        .hotel-booking {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--color4), var(--color5));
+            color: var(--dark-bg);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 15px 0;
+        }
+
+        .hotel-booking:hover {
+            background: linear-gradient(45deg, var(--color5), var(--color4));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--color4), var(--color5));
+            color: var(--dark-bg);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(45deg, var(--color5), var(--color4));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: var(--color4);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            color: var(--color1);
+        }
+
+        .footer-links li {
+            color: var(--color1);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--color1);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color4);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color1);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: linear-gradient(135deg, var(--color6), var(--color5));
+                transition: right 0.3s ease;
+                z-index: 1000;
+                padding-top: 80px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 1.2rem;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                margin: 5px 0;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .language-switcher {
+                margin-left: auto;
+                margin-right: 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .hotel-card img {
+                max-width: 60%;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none !important;
+            }
+
+            nav {
+                position: static !important;
+                width: auto !important;
+                height: auto !important;
+                background: none !important;
+                padding-top: 0 !important;
+            }
+
+            nav ul {
+                flex-direction: row !important;
+                align-items: center !important;
+                padding: 0 !important;
+            }
+
+            nav ul li {
+                width: auto !important;
+                margin: 2px;
+            }
+
+            nav ul li a {
+                display: inline-block !important;
+                padding: 8px !important;
+                font-size: 1.3rem !important;
+                border-radius: 4px !important;
+                background: none !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-container">
+            <a data-en="Why Riyadh?" href="../../index.php" class="logo"><img src="../../assets/images/Logo.png"
+                    alt="الشعار" style="height: auto; width: 100px;"></a>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a></li>
+                    <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية" data-en="Tourist Places">الأماكن
+                            السياحية</a></li>
+                    <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد"
+                            data-en="Culture & Traditions">الثقافة والتقاليد</a></li>
+                    <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                    <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه"
+                            data-en="Shopping & Entertainment">التسوق والترفيه</a></li>
+                    <li><a href="../../index.php#guide" data-ar="دليل الزائر" data-en="Visitor Guide">دليل الزائر</a>
+                    </li>
+                    <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض"
+                            data-en="Tell Us About Riyadh">كلمنا عن الرياض</a></li>
+                    <li><a href="../../index.php#contact" data-ar="اتصل بنا" data-en="Contact Us">اتصل بنا</a></li>
+                </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <select id="languageSelect" title="اختر اللغة / Choose Language"
+                    aria-label="اختر اللغة / Choose Language">
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 data-ar="الفنادق والإقامة في الرياض" data-en="Hotels & Accommodations in Riyadh">الفنادق والإقامة في
+                الرياض</h1>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-ar="دليل شامل للإقامة" data-en="Comprehensive Accommodation Guide">دليل شامل للإقامة</h2>
+            </div>
+
+            <!-- شقق أرت سويت الفندقية -->
+            <div class="hotel-card">
+                <h3>شقق أرت سويت الفندقية <span class="stars">⭐️⭐️⭐️</span></h3>
+                <img src="../../assets/images/Hotels/Art Suite.jpeg" alt="شقق أرت سويت الفندقية">
+                <p>تقع شقق أرت سويت الفندقية بحي الريان على طريق الدائري الشرقي، وتعد خيار مريحا للإقامة الاقتصادية
+                    والمتوسطة، يتميز بتقديم شقق فندقية مجهزة بالكامل.</p>
+                <p>من الخدمات والمميزات التي يقدمها الفندق:</p>
+                <ul>
+                    <li>خدمة الغرف.</li>
+                    <li>الأنترنت الواي فأي مجانا.</li>
+                    <li>خدمة النقل للمطار (برسوم إضافية).</li>
+                    <li>خدمة صف السيارات.</li>
+                </ul>
+                <div class="hotel-price">تبدأ الأسعار من ٢٤٣ ريال.</div>
+                <div style="text-align: center;">
+                    <a href="https://art-suite.riyadh-hotels-sa.com/ar/" target="_blank" rel="noopener"
+                        class="hotel-booking">احجز
+                        الآن</a>
+                </div>
+            </div>
+
+            <!-- فندق هيلتون -->
+            <div class="hotel-card">
+                <h3>فندق هيلتون <span class="stars">⭐️⭐️⭐️⭐️⭐️</span></h3>
+                <img src="../../assets/images/Hotels/Hilton.jpeg" alt="فندق هيلتون">
+                <p>يقع فندق هيلتون الرياض في حي غرناطة على الطريق الدائري الشرقي، ويعد من أبرز الفنادق الفاخرة في
+                    المملكة العربية السعودية. يتميز بقربه من مركز غرناطة للتسوق، وكذلك من أغلب الأماكن المميزة في
+                    الرياض، مما يسهل على الزوار التنقل والوصول إلى المعالم المختلفة، بالإضافة إلى قربه من مترو الرياض.
+                </p>
+                <p>من الخدمات والمميزات التي يقدمها الفندق:</p>
+                <ul>
+                    <li>مطاعم داخل الموقع وخدمة الغرف.</li>
+                    <li>مسبح داخلي وصالة لياقة بدنية مجهزة.</li>
+                    <li>مركز سبا يقدم خدمات الاسترخاء والعناية الشخصية.</li>
+                    <li>خدمة انتظار سيارات مجانية.</li>
+                    <li>صالة رجال الأعمال وقاعات اجتماعات مجهزة.</li>
+                    <li>خدمة الإنترنت واي فاي مجاني في جميع أنحاء الفندق.</li>
+                </ul>
+                <div class="hotel-price">تبدأ الأسعار من ١٤٢٥ ريال.</div>
+                <div style="text-align: center;">
+                    <a href="https://www.hilton.com/ar/book/reservation/rooms/" target="_blank" rel="noopener"
+                        class="hotel-booking">احجز الآن</a>
+                </div>
+            </div>
+
+            <!-- فندق موفنبيك -->
+            <div class="hotel-card">
+                <h3>فندق موفنبيك <span class="stars">⭐️⭐️⭐️⭐️⭐️</span></h3>
+                <img src="../../assets/images/Hotels/Movenpick.jpg" alt="فندق موفنبيك">
+                <p>يقع فندق وريزيدنس موفنبيك في حي الغدير على طريق الملك فهد، بإطلالة مباشرة على منطقة المالية (كافد).
+                    يُعد من أبرز فنادق الفخمة في العاصمة، ويتميز بقربه من الفعاليات والمواقع الحيوية، من مطاعم ومقاهي
+                    ومراكز ترفيه، مما يجعله خيارًا مثاليًا للراغبين في الإقامة بالقرب من أهم معالم المدينة.</p>
+                <p>من الخدمات والمميزات التي يقدمها الفندق:</p>
+                <ul>
+                    <li>مطاعم راقية داخل الفندق مع خدمة غرف على مدار الساعة.</li>
+                    <li>مركز لياقة حديث، ومسبح داخلي وآخر خارجي.</li>
+                    <li>سبا متكامل يقدم جلسات استرخاء وعناية.</li>
+                    <li>قاعات اجتماعات ومرافق للمؤتمرات.</li>
+                    <li>مواقف سيارات مجانية وخدمة صف السيارات.</li>
+                    <li>شبكة إنترنت واي فاي مجانية في جميع مرافق الفندق.</li>
+                </ul>
+                <div class="hotel-price">تبدأ الأسعار من ١٠٠٥ ريال.</div>
+                <div style="text-align: center;">
+                    <a href="https://movenpick.accor.com/en/middle-east/saudi-arabia/riyadh/hotel-residences-riyadh.html"
+                        target="_blank" rel="noopener" class="hotel-booking">احجز الآن</a>
+                </div>
+            </div>
+
+            <!-- شقق الأجنحة الفريدة -->
+            <div class="hotel-card">
+                <h3>شقق الأجنحة الفريدة <span class="stars">⭐️⭐️⭐️</span></h3>
+                <img src="../../assets/images/Hotels/uniquesuites.jpeg" alt="شقق الأجنحة الفريدة">
+                <p>تقع شقق الأجنحة الفريدة بحي الملك فهد على طريق هشام بن عبدالملك، وتُعد من خيارات الإقامة المريحة
+                    والمتوسطة التي تجمع بين الهدوء وسهولة الوصول إلى الأمآكن الحيوية في المدينة مثل مركز حياة مول للتسوق
+                    وصحارى مول.</p>
+                <p>من الخدمات والمميزات التي يقدمها:</p>
+                <ul>
+                    <li>شقق واسعة ومجهزة بالكامل بمطابخ صغيرة.</li>
+                    <li>خدمة استقبال على مدار الساعة.</li>
+                    <li>إنترنت واي فاي مجانية.</li>
+                    <li>مواقف سيارات خاصة.</li>
+                </ul>
+                <div class="hotel-price">تبدأ الأسعار من ٥٣١ ريال.</div>
+                <div style="text-align: center;">
+                    <a href="https://www.uniquesuites.sa/?lang=ar" target="_blank" rel="noopener"
+                        class="hotel-booking">احجز الآن</a>
+                </div>
+            </div>
+
+            <!-- فندق بودل القصر -->
+            <div class="hotel-card">
+                <h3>فندق بودل القصر <span class="stars">⭐️⭐️⭐️</span></h3>
+                <img src="../../assets/images/Hotels/Boudl.jpeg" alt="فندق بودل القصر">
+                <p>يقع فندق بودل القصر في حي السويدي على شارع سلطانة، ويتميز بموقعه الحيوي بالقرب من القصر مول وحديقة
+                    السويدي، مما يتيح للنزلاء سهولة الوصول إلى خيارات التسوّق والترفيه في المنطقة. كما يُعد خيارًا
+                    مثاليًا للعائلات والزوار الباحثين عن إقامة هادئة ومريحة في موقع استراتيجي.</p>
+                <p>من الخدمات والمميزات التي يقدمها:</p>
+                <ul>
+                    <li>غرف وأجنحة فندقية واسعة ومجهّزة بالكامل.</li>
+                    <li>واي فاي مجاني.</li>
+                    <li>مركز لياقة بدنية ومسبح.</li>
+                    <li>نادي أطفال وصالة ألعاب.</li>
+                    <li>إنترنت واي فاي مجاني في جميع أنحاء الفندق.</li>
+                    <li>مطعم يقدّم وجبات متنوعة.</li>
+                </ul>
+                <div class="hotel-price">تبدأ الأسعار من ٥١١ ريال.</div>
+                <div style="text-align: center;">
+                    <a href="https://res.windsurfercrs.com/ibe/index.aspx?hgID=1592&hotelID=16912&langID=14&currID=125&dt1=9449&nights=1&rooms=1&adults=1"
+                        target="_blank" rel="noopener" class="hotel-booking">احجز الآن</a>
+                </div>
+            </div>
+
+            <!-- فندق فيفيان بارك -->
+            <div class="hotel-card">
+                <h3>فندق فيفيان بارك <span class="stars">⭐️⭐️⭐️⭐️</span></h3>
+                <img src="../../assets/images/Hotels/Vivian Park.jpeg" alt="فندق فيفيان بارك">
+                <p>يقع فندق فيفيان بارك في حي الرائد على طريق عبد العزيز بن أحمد السديري، ويُعد خيارًا مناسبًا للعائلات
+                    والزوار الباحثين عن إقامة مريحة وهادئة في بيئة عصرية وخدمات متكاملة، كما يتميز بقربه من المطاعم
+                    والمقاهي والخدمات التي تسهّل على النزلاء قضاء احتياجاتهم اليومية بكل سهولة.</p>
+                <p>من الخدمات والمميزات التي يقدمها الفندق:</p>
+                <ul>
+                    <li>خدمة الغرف.</li>
+                    <li>مسبح داخلي ونادي للياقة.</li>
+                    <li>مطعم يقدّم مأكولات بريطانية وفرنسية وإيطالية، إضافة إلى مقهى.</li>
+                    <li>غرفة سينما.</li>
+                    <li>غرفة ألعاب للأطفال.</li>
+                </ul>
+                <div class="hotel-price">تبدأ الأسعار من ٧٤٥ ريال.</div>
+                <div style="text-align: center;">
+                    <a href="https://bookmystay.io/rooms/14716/2025-11-15/2025-11-16/2/0?google_source=localuniversal&user_list_id=&utm_campaign=&utm_source=free_booking_link&country=SA&price=900.00&language=ar&user_list=&currency=SAR&click_type=hotel&device=mobile"
+                        target="_blank" rel="noopener" class="hotel-booking">احجز الآن</a>
+                </div>
+            </div>
+
+            <!-- فندق التنفيذيين -->
+            <div class="hotel-card">
+                <h3>فندق التنفيذيين <span class="stars">⭐️⭐️⭐️⭐️</span></h3>
+                <img src="../../assets/images/Hotels/Executives.jpeg" alt="فندق التنفيذيين">
+                <p>يقع فندق التنفيذيين في حي العزيزية على شارع الشباب، ضمن منطقة حيوية تضم العديد من المحلات التجارية
+                    والمطاعم. يتميّز الفندق بقربه من محطة مترو الرياض، مما يسهّل على النزلاء التنقّل إلى مختلف أنحاء
+                    المدينة بكل سهولة.</p>
+                <p>من الخدمات والمميزات التي يقدمها الفندق:</p>
+                <ul>
+                    <li>مطعم يقدّم وجبات متنوعة.</li>
+                    <li>مركز لياقة بدنية، مسبح داخلي، غرفة بخار، وساونا.</li>
+                    <li>خدمة استقبال على مدار الساعة.</li>
+                    <li>خدمة غرف متميزة.</li>
+                    <li>إنترنت واي فاي مجاني في جميع المرافق.</li>
+                </ul>
+                <div class="hotel-price">تبدأ الأسعار من ٧٣٠ ريال.</div>
+                <div style="text-align: center;">
+                    <a href="https://executives-hotel.com/en/reservation/Executives-Hotel-AL-Azizia" target="_blank"
+                        rel="noopener" class="hotel-booking">احجز الآن</a>
+                </div>
+            </div>
+
+            <!-- فندق أرجان بارك -->
+            <div class="hotel-card">
+                <h3>فندق أرجان بارك <span class="stars">⭐️⭐️⭐️⭐️</span></h3>
+                <img src="../../assets/images/Hotels/ArjanPark.jpeg" alt="فندق أرجان بارك">
+                <p>يقع فندق أرجان بارك في حي العزيزية على شارع الشباب، ويُعد خيارًا مناسبًا للعائلات والزوار الباحثين عن
+                    إقامة مريحة وهادئة في بيئة عصرية وخدمات متكاملة، كما يتميز بقربه من المحلات والخدمات التي تسهّل على
+                    النزلاء قضاء احتياجاتهم اليومية بكل سهولة.</p>
+                <p>من الخدمات والمميزات التي يقدمها الفندق:</p>
+                <ul>
+                    <li>غرف وأجنحة واسعة مجهزة بالكامل.</li>
+                    <li>واي فاي مجاني في جميع أنحاء الفندق.</li>
+                    <li>خدمة غرف على مدار الساعة.</li>
+                    <li>استقبال على مدار الساعة.</li>
+                    <li>موقف سيارات مجاني.</li>
+                </ul>
+                <div class="hotel-price">تبدأ الأسعار من 233 ريال.</div>
+                <div style="text-align: center;">
+                    <a href="https://arjanpark.sa/luxury/hotels/arjan-park-al-azizia" target="_blank" rel="noopener"
+                        class="hotel-booking">احجز الآن</a>
+                </div>
+            </div>
+
+            <div class="accommodations-grid" style="display:none;">
+                <div class="accommodation-card">
+                    <h3 data-ar="الفنادق الفاخرة" data-en="Luxury Hotels">الفنادق الفاخرة</h3>
+                    <p data-ar="فنادق فاخرة تقدم خدمات راقية ومرافق متطورة، من أفضل الفنادق العالمية في الرياض. فنادق تناسب رجال الأعمال والزوار المميزين."
+                        data-en="Luxury hotels offering upscale services and advanced facilities, from the best international hotels in Riyadh. Hotels suitable for businessmen and distinguished visitors.">
+                        فنادق فاخرة تقدم خدمات راقية ومرافق متطورة، من أفضل الفنادق العالمية في الرياض. فنادق تناسب رجال
+                        الأعمال والزوار المميزين.</p>
+                </div>
+
+                <div class="accommodation-card">
+                    <h3 data-ar="الفنادق المتوسطة" data-en="Mid-Range Hotels">الفنادق المتوسطة</h3>
+                    <p data-ar="فنادق متوسطة تقدم خدمات جيدة ومرافق مناسبة، مع أسعار معقولة. فنادق تناسب العائلات والزوار العاديين."
+                        data-en="Mid-range hotels offering good services and suitable facilities, with reasonable prices. Hotels suitable for families and regular visitors.">
+                        فنادق متوسطة تقدم خدمات جيدة ومرافق مناسبة، مع أسعار معقولة. فنادق تناسب العائلات والزوار
+                        العاديين.</p>
+                </div>
+
+                <div class="accommodation-card">
+                    <h3 data-ar="الفنادق الاقتصادية" data-en="Budget Hotels">الفنادق الاقتصادية</h3>
+                    <p data-ar="فنادق اقتصادية تقدم خدمات أساسية بأسعار مناسبة، مناسبة للزوار الذين يبحثون عن إقامة مريحة وبأسعار معقولة."
+                        data-en="Budget hotels offering basic services at affordable prices, suitable for visitors looking for comfortable accommodation at reasonable prices.">
+                        فنادق اقتصادية تقدم خدمات أساسية بأسعار مناسبة، مناسبة للزوار الذين يبحثون عن إقامة مريحة
+                        وبأسعار معقولة.</p>
+                </div>
+
+                <div class="accommodation-card">
+                    <h3 data-ar="الشقق الفندقية" data-en="Serviced Apartments">الشقق الفندقية</h3>
+                    <p data-ar="شقق فندقية تقدم مرافق منزلية مع خدمات فندقية، مناسبة للإقامة الطويلة والعائلات. شقق توفر خصوصية وراحة أكبر."
+                        data-en="Serviced apartments offering home facilities with hotel services, suitable for long stays and families. Apartments providing more privacy and comfort.">
+                        شقق فندقية تقدم مرافق منزلية مع خدمات فندقية، مناسبة للإقامة الطويلة والعائلات. شقق توفر خصوصية
+                        وراحة أكبر.</p>
+                </div>
+
+                <div class="accommodation-card">
+                    <h3 data-ar="الفنادق التقليدية" data-en="Traditional Hotels">الفنادق التقليدية</h3>
+                    <p data-ar="فنادق تحافظ على الطابع التقليدي السعودي، تقدم تجربة إقامة أصيلة مع الحفاظ على التراث المحلي."
+                        data-en="Hotels that preserve traditional Saudi character, offering authentic accommodation experience while maintaining local heritage.">
+                        فنادق تحافظ على الطابع التقليدي السعودي، تقدم تجربة إقامة أصيلة مع الحفاظ على التراث المحلي.</p>
+                </div>
+
+                <div class="accommodation-card">
+                    <h3 data-ar="الفنادق العصرية" data-en="Modern Hotels">الفنادق العصرية</h3>
+                    <p data-ar="فنادق عصرية تتميز بالتصميم الحديث والمرافق المتطورة، تقدم تجربة إقامة حديثة ومريحة."
+                        data-en="Modern hotels distinguished by contemporary design and advanced facilities, offering modern and comfortable accommodation experience.">
+                        فنادق عصرية تتميز بالتصميم الحديث والمرافق المتطورة، تقدم تجربة إقامة حديثة ومريحة.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="../../index.php" class="back-btn" data-ar="العودة للصفحة الرئيسية"
+                    data-en="Back to Homepage">العودة للصفحة الرئيسية</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-ar="ليه الرياض؟" data-en="Why Riyadh?">ليه الرياض؟</h3>
+                    <p data-ar="منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية."
+                        data-en="A comprehensive platform to introduce Riyadh city and attract tourists and residents to discover the capital of Saudi Arabia.">
+                        منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a>
+                        </li>
+                        <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية"
+                                data-en="Tourist Places">الأماكن السياحية</a></li>
+                        <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد"
+                                data-en="Culture & Traditions">الثقافة والتقاليد</a></li>
+                        <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                        <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه"
+                                data-en="Shopping & Entertainment">التسوق والترفيه</a></li>
+                        <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض"
+                                data-en="Tell Us About Riyadh">كلمنا عن الرياض</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="معلومات الاتصال" data-en="Contact Information">معلومات الاتصال</h3>
+                    <ul class="footer-links">
+                        <li data-ar="الهاتف: 011 123 4567" data-en="Phone: 011 123 4567">الهاتف: 011 123 4567</li>
+                        <li data-ar="البريد الإلكتروني: info@whyriyadh.com" data-en="Email: info@whyriyadh.com">البريد
+                            الإلكتروني: info@whyriyadh.com</li>
+                        <li data-ar="العنوان: الرياض، المملكة العربية السعودية" data-en="Address: Riyadh, Saudi Arabia">
+                            العنوان: الرياض، المملكة العربية السعودية</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="تابعنا" data-en="Follow Us">تابعنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-ar="تويتر" data-en="Twitter">تويتر</a></li>
+                        <li><a href="#" data-ar="انستغرام" data-en="Instagram">انستغرام</a></li>
+                        <li><a href="#" data-ar="فيسبوك" data-en="Facebook">فيسبوك</a></li>
+                        <li><a href="#" data-ar="يوتيوب" data-en="YouTube">يوتيوب</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p data-ar="جميع الحقوق محفوظة &copy;2025 ليه الرياض؟"
+                    data-en="All rights reserved &copy;2025 Why Riyadh?">جميع الحقوق محفوظة &copy;2025 ليه الرياض؟</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentLanguage = 'ar';
+
+        // تعيين dir عند تحميل الصفحة
+        document.documentElement.dir = 'rtl';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
+                const text = lang === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+                if (text) {
+                    // التحقق من وجود وسوم HTML في النص (مثل <br>)
+                    // إذا كان النص يحتوي على HTML، نستخدم innerHTML
+                    // وإلا نستخدم textContent للأمان
+                    if (text.includes('<br') || text.includes('<BR')) {
+                        element.innerHTML = text;
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+        }
+
+        document.getElementById('languageSelect').addEventListener('change', function () {
+            changeLanguage(this.value);
+        });
+
+        // قائمة البرجر
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('nav');
+
+        if (hamburger && nav) {
+            hamburger.addEventListener('click', function () {
+                this.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            // إغلاق القائمة عند النقر على رابط
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function () {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

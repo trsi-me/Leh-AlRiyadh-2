@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المولات الحديثة - ليه الرياض؟</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+
+        :root {
+            --color1: #fff4e3;
+            --color2: #fdf4e4;
+            --color3: #fce7cc;
+            --color4: #AB7E50;
+            --color5: #aea56d;
+            --color6: #255c46;
+            --dark-bg: var(--color1);
+            --dark-text: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--color6), var(--color5));
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color3);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--color4);
+        }
+
+        /* قائمة البرجر */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color2);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            position: relative;
+            text-align: center;
+        }
+
+        nav ul li a {
+            color: var(--color2);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--color4);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-switcher select {
+            background-color: var(--color6);
+            color: var(--color2);
+            border: 1px solid var(--color5);
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .language-switcher select:hover {
+            background-color: var(--color5);
+            transform: scale(1.05);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://siaha.net/wp-content/uploads/2021/05/%D9%85%D9%88%D9%84-%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6-%D8%A8%D8%A7%D8%B1%D9%83-768x512.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color2);
+            margin-bottom: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--color4);
+        }
+
+        .section {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--color4);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color5), var(--color4));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .malls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .mall-card {
+            background: linear-gradient(135deg, rgba(37, 92, 70, 0.3), rgba(174, 165, 109, 0.2));
+            border-radius: 15px;
+            padding: 30px;
+            border-right: 5px solid var(--color4);
+            transition: all 0.3s ease;
+        }
+
+        .mall-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .mall-card h3 {
+            color: var(--color4);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .mall-card p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .complex-card {
+            background: linear-gradient(135deg, rgba(37, 92, 70, 0.1), rgba(174, 165, 109, 0.1));
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-right: 4px solid var(--color4);
+            transition: all 0.3s ease;
+            text-align: right;
+        }
+
+        .complex-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .complex-card h3 {
+            color: var(--color4);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .complex-card img {
+            max-width: 40%;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .complex-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--color4), var(--color5));
+            color: var(--dark-bg);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(45deg, var(--color5), var(--color4));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: var(--color4);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p {
+            color: var(--color1);
+        }
+
+        .footer-links li {
+            color: var(--color1);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--color1);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color4);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color1);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: linear-gradient(135deg, var(--color6), var(--color5));
+                transition: right 0.3s ease;
+                z-index: 1000;
+                padding-top: 80px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 15px;
+                font-size: 1.2rem;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                margin: 5px 0;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .language-switcher {
+                margin-left: auto;
+                margin-right: 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .complex-card img {
+                max-width: 60%;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none !important;
+            }
+
+            nav {
+                position: static !important;
+                width: auto !important;
+                height: auto !important;
+                background: none !important;
+                padding-top: 0 !important;
+            }
+
+            nav ul {
+                flex-direction: row !important;
+                align-items: center !important;
+                padding: 0 !important;
+            }
+
+            nav ul li {
+                width: auto !important;
+                margin: 2px;
+            }
+
+            nav ul li a {
+                display: inline-block !important;
+                padding: 8px !important;
+                font-size: 1.3rem !important;
+                border-radius: 4px !important;
+                background: none !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-container">
+            <a data-en="Why Riyadh?" href="../../index.php" class="logo"><img src="../../assets/images/Logo.png"
+                    alt="الشعار" style="height: auto; width: 100px;"></a>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a></li>
+                    <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية" data-en="Tourist Places">الأماكن
+                            السياحية</a></li>
+                    <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد"
+                            data-en="Culture & Traditions">الثقافة والتقاليد</a></li>
+                    <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                    <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه"
+                            data-en="Shopping & Entertainment">التسوق والترفيه</a></li>
+                    <li><a href="../../index.php#guide" data-ar="دليل الزائر" data-en="Visitor Guide">دليل الزائر</a>
+                    </li>
+                    <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض"
+                            data-en="Tell Us About Riyadh">كلمنا عن الرياض</a></li>
+                    <li><a href="../../index.php#contact" data-ar="اتصل بنا" data-en="Contact Us">اتصل بنا</a></li>
+                </ul>
+            </nav>
+
+            <div class="language-switcher">
+                <select id="languageSelect" title="اختر اللغة / Choose Language"
+                    aria-label="اختر اللغة / Choose Language">
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 data-ar="المولات الحديثة في الرياض" data-en="Modern Malls in Riyadh">المولات الحديثة في الرياض</h1>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-ar="استمتع بأفضل مراكز التسوق" data-en="Enjoy the Best Shopping Centers">استمتع بأفضل مراكز
+                    التسوق</h2>
+            </div>
+
+            <!-- واجهة روشن -->
+            <div class="complex-card">
+                <h3>واجهة روشن</h3>
+                <img src="../../assets/images/Complexes/001.png" alt="واجهة روشن">
+                <p>تعد واجهة روشن من أكبر مجمعات التسوق في الرياض، حيث تضم العديد من الكوفيهات والمطاعم ومحلات العطور
+                    والملابس. يتميز المجمع بتصميمه الجميل الذي يجعله وجهة مناسبة للعوائل الباحثة عن تجربة تسوق وترفيه
+                    متكاملة.</p>
+            </div>
+
+            <!-- فيا رياض -->
+            <div class="complex-card">
+                <h3>فيا رياض</h3>
+                <img src="../../assets/images/Complexes/002.png" alt="فيا رياض">
+                <p>يُعتبر فيا رياض من أرقى المجمعات في العاصمة، ويتميز بتصميم داخلي فريد ونادر. يضم عدة مطاعم وفنادق
+                    وناديًا رياضيًا، إلا أنه لا يعد مناسبًا للعوائل، بل هو وجهة أكثر ملاءمة للباحثين عن تجربة راقية
+                    وخاصة.</p>
+            </div>
+
+            <!-- المملكة سوشيال داينينغ -->
+            <div class="complex-card">
+                <h3>المملكة سوشيال داينينغ</h3>
+                <img src="../../assets/images/Complexes/005.png" alt="المملكة سوشيال داينينغ">
+                <p>المملكة سوشال داينينغ هو المكان الذي يجمع جميع الكوفيهات والمطاعم في موقع واحد، ويتميز بإطلالته
+                    الجميلة على مدينة الرياض، مما يجعله خيارًا مثاليًا لعشاق الأجواء المميزة والإطلالات البانورامية.</p>
+            </div>
+
+            <!-- بارك أفنيو -->
+            <div class="complex-card">
+                <h3>بارك أفنيو</h3>
+                <img src="../../assets/images/Complexes/007.png" alt="بارك أفنيو">
+                <p>بارك أفنيو مجمع كبير يناسب العوائل، حيث يجمع بين أماكن التسوق والكوفيهات والمطاعم وألعاب الأطفال
+                    والسينما في مكان واحد. ويُعتبر أيضًا من أكبر المجمعات في الرياض، مما يجعله وجهة متكاملة للتسوق
+                    والترفيه.</p>
+            </div>
+
+            <!-- مجمع سكة -->
+            <div class="complex-card">
+                <h3>مجمع سكة</h3>
+                <img src="../../assets/images/Complexes/011.png" alt="مجمع سكة">
+                <p>مجمع سكة يُعد صغيرًا نسبيًا، وهو مناسب لاجتماعات الأصدقاء، حيث يضم عددًا محدودًا من الكافيهات
+                    والمطاعم، مما يمنحه طابعًا هادئًا وبسيطًا.</p>
+            </div>
+
+            <!-- الرياض بارك -->
+            <div class="complex-card">
+                <h3>الرياض بارك</h3>
+                <img src="../../assets/images/Complexes/009.png" alt="الرياض بارك">
+                <p>الرياض بارك يُعتبر أحدث مجمعات التسوق في الرياض، وهو مناسب للعوائل بشكل خاص. يضم ماركات عالمية، إضافة
+                    إلى مطاعم وكوفيهات عالمية، ويحتوي على أكبر سينما في الرياض ومنطقة مخصصة للألعاب، مما يجعله وجهة
+                    عصرية ومتكاملة.</p>
+            </div>
+
+            <div class="malls-grid" style="display:none;">
+                <div class="mall-card">
+                    <h3 data-ar="الرياض بارك" data-en="Riyadh Park">الرياض بارك</h3>
+                    <p data-ar="الرياض بارك هو أحد أكبر مراكز التسوق في الرياض، يضم مئات المحلات التجارية، مطاعم عالمية، ومرافق ترفيهية متنوعة. المركز يشكل وجهة تسوق رئيسية للزوار والمقيمين."
+                        data-en="Riyadh Park is one of the largest shopping centers in Riyadh, housing hundreds of retail stores, international restaurants, and diverse entertainment facilities. The center forms a major shopping destination for visitors and residents.">
+                        الرياض بارك هو أحد أكبر مراكز التسوق في الرياض، يضم مئات المحلات التجارية، مطاعم عالمية، ومرافق
+                        ترفيهية متنوعة. المركز يشكل وجهة تسوق رئيسية للزوار والمقيمين.</p>
+                </div>
+
+                <div class="mall-card">
+                    <h3 data-ar="المركز العالمي للتسوق" data-en="World Trade Center">المركز العالمي للتسوق</h3>
+                    <p data-ar="المركز العالمي للتسوق هو أحد أقدم وأكبر مراكز التسوق في الرياض، يضم محلات تجارية متنوعة، مطاعم، ومرافق ترفيهية. المركز يتميز بموقعه المتميز وتنوع منتجاته."
+                        data-en="World Trade Center is one of the oldest and largest shopping centers in Riyadh, housing diverse retail stores, restaurants, and entertainment facilities. The center is distinguished by its prime location and product diversity.">
+                        المركز العالمي للتسوق هو أحد أقدم وأكبر مراكز التسوق في الرياض، يضم محلات تجارية متنوعة، مطاعم،
+                        ومرافق ترفيهية. المركز يتميز بموقعه المتميز وتنوع منتجاته.</p>
+                </div>
+
+                <div class="mall-card">
+                    <h3 data-ar="النخيل مول" data-en="Al-Nakheel Mall">النخيل مول</h3>
+                    <p data-ar="النخيل مول هو مركز تسوق حديث يتميز بتصميمه المعماري المميز ومرافقه المتطورة. يضم محلات تجارية عالمية، مطاعم متنوعة، ومرافق ترفيهية للعائلات."
+                        data-en="Al-Nakheel Mall is a modern shopping center distinguished by its unique architectural design and advanced facilities. It houses international retail stores, diverse restaurants, and family entertainment facilities.">
+                        النخيل مول هو مركز تسوق حديث يتميز بتصميمه المعماري المميز ومرافقه المتطورة. يضم محلات تجارية
+                        عالمية، مطاعم متنوعة، ومرافق ترفيهية للعائلات.</p>
+                </div>
+
+                <div class="mall-card">
+                    <h3 data-ar="غرناطة مول" data-en="Granada Mall">غرناطة مول</h3>
+                    <p data-ar="غرناطة مول هو مركز تسوق متطور يضم أفضل الماركات العالمية والمحلية، مطاعم عالمية، ومرافق ترفيهية متنوعة. المركز يقدم تجربة تسوق شاملة ومتنوعة."
+                        data-en="Granada Mall is a developed shopping center housing the best international and local brands, international restaurants, and diverse entertainment facilities. The center provides a comprehensive and diverse shopping experience.">
+                        غرناطة مول هو مركز تسوق متطور يضم أفضل الماركات العالمية والمحلية، مطاعم عالمية، ومرافق ترفيهية
+                        متنوعة. المركز يقدم تجربة تسوق شاملة ومتنوعة.</p>
+                </div>
+
+                <div class="mall-card">
+                    <h3 data-ar="الرياض جاليري" data-en="Riyadh Gallery">الرياض جاليري</h3>
+                    <p data-ar="الرياض جاليري هو مركز تسوق فاخر يضم محلات تجارية راقية، مطاعم عالمية، ومرافق ترفيهية متطورة. المركز يقدم تجربة تسوق فريدة ومميزة."
+                        data-en="Riyadh Gallery is a luxury shopping center housing upscale retail stores, international restaurants, and advanced entertainment facilities. The center provides a unique and distinctive shopping experience.">
+                        الرياض جاليري هو مركز تسوق فاخر يضم محلات تجارية راقية، مطاعم عالمية، ومرافق ترفيهية متطورة.
+                        المركز يقدم تجربة تسوق فريدة ومميزة.</p>
+                </div>
+
+                <div class="mall-card">
+                    <h3 data-ar="الرياض بلازا" data-en="Riyadh Plaza">الرياض بلازا</h3>
+                    <p data-ar="الرياض بلازا هو مركز تسوق حديث يضم محلات تجارية متنوعة، مطاعم، ومرافق ترفيهية. المركز يتميز بموقعه المتميز وتنوع منتجاته."
+                        data-en="Riyadh Plaza is a modern shopping center housing diverse retail stores, restaurants, and entertainment facilities. The center is distinguished by its prime location and product diversity.">
+                        الرياض بلازا هو مركز تسوق حديث يضم محلات تجارية متنوعة، مطاعم، ومرافق ترفيهية. المركز يتميز
+                        بموقعه المتميز وتنوع منتجاته.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="../../index.php" class="back-btn" data-ar="العودة للصفحة الرئيسية"
+                    data-en="Back to Homepage">العودة للصفحة الرئيسية</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-ar="ليه الرياض؟" data-en="Why Riyadh?">ليه الرياض؟</h3>
+                    <p data-ar="منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية."
+                        data-en="A comprehensive platform to introduce Riyadh city and attract tourists and residents to discover the capital of Saudi Arabia.">
+                        منصة شاملة للتعريف بمدينة الرياض وجذب السياح والمقيمين لاكتشاف عاصمة المملكة العربية السعودية.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="../../index.php#about" data-ar="عن الرياض" data-en="About Riyadh">عن الرياض</a>
+                        </li>
+                        <li><a href="../../index.php#tourist" data-ar="الأماكن السياحية"
+                                data-en="Tourist Places">الأماكن السياحية</a></li>
+                        <li><a href="../../index.php#culture" data-ar="الثقافة والتقاليد"
+                                data-en="Culture & Traditions">الثقافة والتقاليد</a></li>
+                        <li><a href="../../index.php#events" data-ar="الفعاليات" data-en="Events">الفعاليات</a></li>
+                        <li><a href="../../index.php#shopping" data-ar="التسوق والترفيه"
+                                data-en="Shopping & Entertainment">التسوق والترفيه</a></li>
+                        <li><a href="../../index.php#comments" data-ar="كلمنا عن الرياض"
+                                data-en="Tell Us About Riyadh">كلمنا عن الرياض</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="معلومات الاتصال" data-en="Contact Information">معلومات الاتصال</h3>
+                    <ul class="footer-links">
+                        <li data-ar="الهاتف: 011 123 4567" data-en="Phone: 011 123 4567">الهاتف: 011 123 4567</li>
+                        <li data-ar="البريد الإلكتروني: info@whyriyadh.com" data-en="Email: info@whyriyadh.com">البريد
+                            الإلكتروني: info@whyriyadh.com</li>
+                        <li data-ar="العنوان: الرياض، المملكة العربية السعودية" data-en="Address: Riyadh, Saudi Arabia">
+                            العنوان: الرياض، المملكة العربية السعودية</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3 data-ar="تابعنا" data-en="Follow Us">تابعنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-ar="تويتر" data-en="Twitter">تويتر</a></li>
+                        <li><a href="#" data-ar="انستغرام" data-en="Instagram">انستغرام</a></li>
+                        <li><a href="#" data-ar="فيسبوك" data-en="Facebook">فيسبوك</a></li>
+                        <li><a href="#" data-ar="يوتيوب" data-en="YouTube">يوتيوب</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p data-ar="جميع الحقوق محفوظة &copy;2025 ليه الرياض؟"
+                    data-en="All rights reserved &copy;2025 Why Riyadh?">جميع الحقوق محفوظة &copy;2025 ليه الرياض؟</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentLanguage = 'ar';
+
+        // تعيين dir عند تحميل الصفحة
+        document.documentElement.dir = 'rtl';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('[data-ar][data-en]').forEach(element => {
+                const text = lang === 'ar' ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+                if (text) {
+                    // التحقق من وجود وسوم HTML في النص (مثل <br>)
+                    // إذا كان النص يحتوي على HTML، نستخدم innerHTML
+                    // وإلا نستخدم textContent للأمان
+                    if (text.includes('<br') || text.includes('<BR')) {
+                        element.innerHTML = text;
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+        }
+
+        document.getElementById('languageSelect').addEventListener('change', function () {
+            changeLanguage(this.value);
+        });
+
+        // قائمة البرجر
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('nav');
+
+        if (hamburger && nav) {
+            hamburger.addEventListener('click', function () {
+                this.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            // إغلاق القائمة عند النقر على رابط
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function () {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
